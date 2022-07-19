@@ -1,4 +1,4 @@
-package com.terbah.sketch.app.core;
+package com.terbah.sketch.app.core.workflow;
 
 import com.terbah.sketch.api.SketchComponent;
 
