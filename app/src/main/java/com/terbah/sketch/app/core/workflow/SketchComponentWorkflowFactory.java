@@ -15,7 +15,9 @@ public class SketchComponentWorkflowFactory {
     private SketchDataInjector injector;
 
     public SketchComponentWorkflowFactory() {
-
+        /**
+         * Constructor empty because all the attributes are autowired
+         */
     }
 
     public SketchComponentWorkflow createWorkflow() {

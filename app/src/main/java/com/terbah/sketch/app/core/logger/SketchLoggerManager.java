@@ -15,6 +15,10 @@ import java.util.logging.Logger;
  */
 public class SketchLoggerManager {
 
+    public SketchLoggerManager() {
+
+    }
+
     private static final Map<Class<?>, Logger> LOGGERS = new HashMap<>();
 
     /**

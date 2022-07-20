@@ -15,23 +15,23 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = SpringConfiguration.class)
-public class SketchComponentConfigurationManagerTest {
+class SketchComponentConfigurationManagerTest {
 
     @Autowired
-    public SketchDataInjector injector;
+    private SketchDataInjector injector;
 
     @Autowired
     private SketchComponentConfigurationManager configurationManager;
 
     @BeforeEach
-    public void setupManager() {
+    void setupManager() {
         this.configurationManager.registerComponent(SketchComponentWithStringParam.class);
         this.configurationManager.registerComponent(SketchComponentWithTwoString.class);
         this.configurationManager.registerComponent(SketchInvalidComponent.class);
     }
 
     @Test
-    public void testWellInsertionOfComponents() {
+    void testWellInsertionOfComponents() {
         SketchComponentConfiguration configuration = this.configurationManager.getConfigurationByComponentClass(SketchComponentWithStringParam.class);
         assertNotNull(configuration);
         assertEquals(String.class, configuration.getReturnType());

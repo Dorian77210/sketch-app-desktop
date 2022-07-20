@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = SpringConfiguration.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class SketchComponentWorkflowTest {
+class SketchComponentWorkflowTest {
 
     private SketchComponentWorkflow workflow;
 
@@ -47,12 +47,12 @@ public class SketchComponentWorkflowTest {
     }
 
     @BeforeEach
-    public void setWorkflow() {
+    void setWorkflow() {
         this.workflow = this.factory.createWorkflow();
     }
 
     @Test
-    public void testImpossibleCreationOfLink() {
+    void testImpossibleCreationOfLink() {
         SketchComponentWithIntParam intComponent = new SketchComponentWithIntParam();
         SketchComponentWithStringParam stringComponent = new SketchComponentWithStringParam();
 
@@ -65,7 +65,7 @@ public class SketchComponentWorkflowTest {
      * c --> a - d
      */
     @Test
-    public void testWellCreationOfSingleLink() {
+    void testWellCreationOfSingleLink() {
         SketchComponentWithStringParam c = new SketchComponentWithStringParam();
         SketchComponentWithTwoString d = new SketchComponentWithTwoString();
 
@@ -85,7 +85,7 @@ public class SketchComponentWorkflowTest {
     }
 
     @Test
-    public void testWellExecution() {
+    void testWellExecution() {
         SketchComponentWithStringParam a = new SketchComponentWithStringParam();
         SketchComponentWithTwoString c = new SketchComponentWithTwoString();
         assertTrue(this.workflow.createLinkBetween(a, c, "a"));

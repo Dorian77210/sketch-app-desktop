@@ -56,7 +56,7 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
     @Override
     public boolean execute(SketchComponent<?> component) {
         Map<SketchComponent<?>, Object> data = new HashMap<>();
-        Stack<SketchComponent<?>> componentStack = new Stack<>();
+        Deque<SketchComponent<?>> componentStack = new ArrayDeque<>();
         List<SketchComponent<?>> currentComponents = new ArrayList<>();
         currentComponents.add(component);
         componentStack.push(component);
@@ -85,10 +85,11 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
 
             if (this.hasParents(currentComponent)) {
                 Map<String, SketchComponent<?>> parents = this.edges.get(currentComponent);
-                for (String entryName : parents.keySet()) {
+                for (Map.Entry<String, SketchComponent<?>> entry : parents.entrySet()) {
+                    String entryName = entry.getKey();
                     Object parentResult = data.get(parents.get(entryName));
                     if (!this.dataInjector.injectData(currentComponent, entryName, parentResult)) {
-                        // todo: throw error or put it in the console
+                        // throw error or put it in the console
                         return false;
                     }
                 }
@@ -96,10 +97,10 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
 
             try {
                 Object result = currentComponent.execute();
-                this.logger.log(Level.FINE, "Result = " + result);
+                this.logger.log(Level.FINE, "Result = {}", result);
                 data.put(currentComponent, result);
             } catch (SketchComponentExecuteException e) {
-                this.logger.log(Level.SEVERE, "Error during the execution of the component " + currentComponent, e);
+                this.logger.log(Level.SEVERE, String.format("Error during the execution of the component %s", currentComponent), e);
                 return false;
             }
         }
