@@ -11,8 +11,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="app" target="11" />
-      <module name="sketch-api" target="11" />
+      <module name="app" target="18" />
+      <module name="sketch-api" target="18" />
       <module name="sketch-app" target="1.5" />
     </bytecodeTargetLevel>
   </component>
