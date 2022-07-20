@@ -1,6 +1,7 @@
 package com.terbah.sketch.app.ui;
 
 import javafx.scene.Scene;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,11 @@ public class SketchMainScene extends Scene {
     private SketchComponentTreeView treeView;
 
     /**
+     * The tab that contains all boards.
+     */
+    private SketchTabView tabView;
+
+    /**
      * The main layout of the application
      */
     private BorderPane mainLayout;
@@ -50,11 +56,18 @@ public class SketchMainScene extends Scene {
         this.treeView = treeView;
     }
 
+    @Autowired
+    public void setTabView(SketchTabView tabView) {
+        this.tabView = tabView;
+    }
+
     @PostConstruct
     private void init() {
         this.mainLayout = (BorderPane) this.getRoot();
         this.mainLayout.setTop(this.menuBar);
-        this.mainLayout.setLeft(this.treeView);
+        SplitPane splitPane = new SplitPane(this.treeView, this.tabView);
+        splitPane.setDividerPositions(0.2f, 0.6f, 0.9f);
+        this.mainLayout.setCenter(splitPane);
     }
 
     public SketchMainScene() {

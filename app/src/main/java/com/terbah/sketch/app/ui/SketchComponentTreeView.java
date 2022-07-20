@@ -1,6 +1,7 @@
 package com.terbah.sketch.app.ui;
 
 import com.terbah.sketch.api.SketchComponent;
+import com.terbah.sketch.app.core.board.SketchBoardManager;
 import com.terbah.sketch.app.core.config.SketchComponentConfiguration;
 import com.terbah.sketch.app.core.config.SketchComponentConfigurationManager;
 import com.terbah.sketch.app.ui.model.SketchComponentTreeModel;
@@ -39,6 +40,9 @@ public class SketchComponentTreeView extends BorderPane {
     @Autowired
     private SketchComponentConfigurationManager configurationManager;
 
+    @Autowired
+    private SketchBoardManager boardManager;
+
     /**
      * Constant used for the filter method.
      */
@@ -52,10 +56,10 @@ public class SketchComponentTreeView extends BorderPane {
             if (newValue != null)
             {
                 SketchComponentTreeItemModel itemModel = newValue.getValue();
-                Class<? extends SketchComponent> componentClass = itemModel.getComponentClass();
+                Class<? extends SketchComponent<?>> componentClass = itemModel.getComponentClass();
                 if (componentClass != null)
                 {
-                    // add the selected component
+                    this.boardManager.setComponentClassSelected(componentClass);
                 }
             }
         });
@@ -78,7 +82,6 @@ public class SketchComponentTreeView extends BorderPane {
 
     public void filterBy(final String filter)
     {
-        System.out.println("filter");
         // Create the associated model
         for (Map.Entry<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> entry : this.configurationManager.getComponentsClass().entrySet()) {
             SketchComponentConfiguration configuration = entry.getValue();
