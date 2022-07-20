@@ -1,8 +1,6 @@
 package com.terbah.sketch.app.ui.model;
 
 import com.terbah.sketch.api.SketchComponent;
-
-import java.util.List;
 import java.util.Set;
 
 /**
