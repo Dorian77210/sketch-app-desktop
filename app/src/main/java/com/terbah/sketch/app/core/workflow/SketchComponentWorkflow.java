@@ -52,4 +52,9 @@ public interface SketchComponentWorkflow {
      * @param entryName The name of the entry for of the target component.
      */
     void removeLink(SketchComponent<?> child, String entryName);
+
+    /**
+     * Clear the workflow.
+     */
+    void clear();
 }

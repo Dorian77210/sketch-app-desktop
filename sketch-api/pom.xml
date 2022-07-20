@@ -6,7 +6,7 @@
 
     <groupId>com.terbah</groupId>
     <artifactId>sketch-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>sketch-api</name>
 
     <properties>
@@ -60,7 +60,6 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.sketchapi/com.example.sketchapi.HelloApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

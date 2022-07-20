@@ -92,4 +92,17 @@ class SketchComponentWorkflowTest {
         assertTrue(this.workflow.createLinkBetween(a, c, "b"));
         this.workflow.execute(c);
     }
+
+    @Test
+    void testClearWorkflow() {
+        SketchComponentWithStringParam a = new SketchComponentWithStringParam();
+        SketchComponentWithTwoString c = new SketchComponentWithTwoString();
+        assertTrue(this.workflow.createLinkBetween(a, c, "a"));
+        assertTrue(this.workflow.createLinkBetween(a, c, "b"));
+
+        this.workflow.clear();
+
+        assertFalse(this.workflow.existsLinkBetween(a, c, "a"));
+        assertFalse(this.workflow.existsLinkBetween(a, c, "b"));
+    }
 }

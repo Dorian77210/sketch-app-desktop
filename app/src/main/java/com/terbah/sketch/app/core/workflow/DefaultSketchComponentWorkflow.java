@@ -199,4 +199,10 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
             parents.remove(entryName);
         }
     }
+
+    @Override
+    public void clear() {
+        this.edges.clear();
+        this.orphanComponents.clear();
+    }
 }
