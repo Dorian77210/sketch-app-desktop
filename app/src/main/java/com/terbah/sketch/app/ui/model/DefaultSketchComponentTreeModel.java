@@ -33,7 +33,7 @@ public class DefaultSketchComponentTreeModel implements SketchComponentTreeModel
     private SketchComponentConfigurationManager configurationManager;
 
     public DefaultSketchComponentTreeModel() {
-        this.root = new SketchComponentTreeItemModel("List of components");
+        this.root = new DefaultSketchComponentTreeItemModel("List of components");
     }
 
     @Override
@@ -56,7 +56,7 @@ public class DefaultSketchComponentTreeModel implements SketchComponentTreeModel
                     .orElse(null);
 
             if (foundNode == null) {
-                currentNode = currentNode.insertChildren(namespaceElement);
+                currentNode = currentNode.insertChild(namespaceElement);
             }
             else
             {
@@ -71,7 +71,12 @@ public class DefaultSketchComponentTreeModel implements SketchComponentTreeModel
 
     @Override
     public void clear() {
-        this.root.children.clear();
+        this.root.getChildren().clear();
+    }
+
+    @Override
+    public SketchComponentTreeItemModel getRoot() {
+        return this.root;
     }
 
     @Override
@@ -116,7 +121,7 @@ public class DefaultSketchComponentTreeModel implements SketchComponentTreeModel
      *
      * Class that represents the node inside the tree of component
      */
-    public static class SketchComponentTreeItemModel
+    private static class DefaultSketchComponentTreeItemModel implements SketchComponentTreeItemModel
     {
         /**
          * The children in the tree of the current component.
@@ -136,11 +141,11 @@ public class DefaultSketchComponentTreeModel implements SketchComponentTreeModel
         /**
          * Constructor of the class <code>SketchComponentTreeItemModel</code>
          *
-         * @param packageElement The package element associated to the node.
+         * @param namespaceElement The namespace element associated to the node.
          */
-        SketchComponentTreeItemModel(String packageElement)
+        private DefaultSketchComponentTreeItemModel(String namespaceElement)
         {
-            this(packageElement, null);
+            this(namespaceElement, null);
         }
 
         /**
@@ -148,7 +153,7 @@ public class DefaultSketchComponentTreeModel implements SketchComponentTreeModel
          * @param namespaceElement The package element associated to the node.
          * @param componentClass The component class associated to the node.
          */
-        SketchComponentTreeItemModel(String namespaceElement, Class<? extends SketchComponent<?>> componentClass)
+        DefaultSketchComponentTreeItemModel(String namespaceElement, Class<? extends SketchComponent<?>> componentClass)
         {
             this.children = new HashSet<>();
             this.namespaceElement = namespaceElement;
@@ -185,11 +190,11 @@ public class DefaultSketchComponentTreeModel implements SketchComponentTreeModel
         /**
          * Add a new children.
          *
-         * @param packageElement The package element for the new node.
+         * @param namespaceElement The namespace element for the new node.
          */
-        public SketchComponentTreeItemModel insertChildren(final String packageElement)
+        public SketchComponentTreeItemModel insertChild(final String namespaceElement)
         {
-            SketchComponentTreeItemModel itemModel = new SketchComponentTreeItemModel(packageElement);
+            SketchComponentTreeItemModel itemModel = new DefaultSketchComponentTreeItemModel(namespaceElement);
             this.children.add(itemModel);
             return itemModel;
         }
@@ -213,8 +218,8 @@ public class DefaultSketchComponentTreeModel implements SketchComponentTreeModel
         public boolean equals(Object object)
         {
             if (object == null) return false;
-            if (! (object instanceof SketchComponentTreeItemModel)) return false;
-            SketchComponentTreeItemModel itemModel = (SketchComponentTreeItemModel) object;
+            if (! (object instanceof DefaultSketchComponentTreeItemModel)) return false;
+            DefaultSketchComponentTreeItemModel itemModel = (DefaultSketchComponentTreeItemModel) object;
             if (!this.namespaceElement.equals(itemModel.namespaceElement)) return false;
             return this.componentClass == itemModel.componentClass;
         }

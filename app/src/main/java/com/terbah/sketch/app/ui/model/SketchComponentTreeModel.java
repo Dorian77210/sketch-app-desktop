@@ -2,6 +2,9 @@ package com.terbah.sketch.app.ui.model;
 
 import com.terbah.sketch.api.SketchComponent;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * @author Dorian TERBAH
  *
@@ -31,4 +34,44 @@ public interface SketchComponentTreeModel {
      * Clear the tree.
      */
     void clear();
+
+    /**
+     * @return The root of the tree
+     */
+    SketchComponentTreeItemModel getRoot();
+
+    /**
+     * @author Dorian TERBAH
+     *
+     * Interface that defines what is an item in the tree model.
+     *
+     * @since 1.0
+     */
+    interface SketchComponentTreeItemModel {
+
+        /**
+         * @return A set with the current node children.
+         */
+        Set<SketchComponentTreeItemModel> getChildren();
+
+        /**
+         * @return The namespace associated to this item.
+         */
+        String getNamespaceElement();
+
+        /**
+         * Update the class associated to this item.
+         *
+         * @param componentClass The new class.
+         */
+        void setComponentClass(Class<? extends SketchComponent<?>> componentClass);
+
+        /**
+         * Insert a child.
+         *
+         * @param namespaceElement The namespace element associated to this element.
+         * @return The new created child.
+         */
+        SketchComponentTreeItemModel insertChild(final String namespaceElement);
+    }
 }
