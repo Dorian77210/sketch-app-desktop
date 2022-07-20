@@ -52,7 +52,7 @@ public class SketchDataInjector {
             try {
                 method.invoke(component, data);
             } catch (Exception exception) {
-                this.logger.log(Level.SEVERE, "Error during data injection in the component " + component);
+                this.logger.log(Level.SEVERE, "Error during data injection in the component {}", component);
                 return false;
             }
         }

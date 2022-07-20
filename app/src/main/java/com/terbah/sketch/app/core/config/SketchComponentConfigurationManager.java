@@ -2,8 +2,6 @@ package com.terbah.sketch.app.core.config;
 
 import com.terbah.sketch.api.SketchComponent;
 
-import java.util.Optional;
-
 /**
  * @author Dorian TERBAH
  * <p>

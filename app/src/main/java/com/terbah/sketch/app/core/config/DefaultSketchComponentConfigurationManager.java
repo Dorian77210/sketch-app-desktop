@@ -44,11 +44,11 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
         try {
             this.validate(componentClass);
         } catch (SketchComponentMissingRequiredAnnotation exception) {
-            this.logger.log(Level.SEVERE, "Error during the register of the component " + componentClass, exception);
+            this.logger.log(Level.SEVERE, String.format("Error during the register of the component %s", componentClass), exception);
             return;
         }
 
-        this.logger.log(Level.FINE, "Register component " + componentClass);
+        this.logger.log(Level.FINE, "Register component {} ", componentClass);
 
         String componentName = componentClass.getAnnotation(ComponentName.class).value();
         String namespace = componentClass.getAnnotation(ComponentNamespace.class).value();
@@ -68,7 +68,7 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
                 String paramName = method.getAnnotation(MethodInjectable.class).value();
                 Class<?> paramType = method.getParameterTypes()[0];
 
-                this.logger.log(Level.FINE, "Find the method to be an injectable method " + method);
+                this.logger.log(Level.FINE, "Find the method to be an injectable method {} ", method);
 
                 configuration.addParameter(paramName, method, paramType);
             }
