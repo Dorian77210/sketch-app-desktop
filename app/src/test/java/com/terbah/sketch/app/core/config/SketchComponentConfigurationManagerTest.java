@@ -51,7 +51,5 @@ public class SketchComponentConfigurationManagerTest {
 
         configuration = this.configurationManager.getConfigurationByComponentClass(SketchInvalidComponent.class);
         assertNull(configuration);
-
-        assertTrue(false);
     }
 }
