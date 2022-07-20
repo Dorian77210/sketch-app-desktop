@@ -65,6 +65,11 @@ public interface SketchComponentTreeModel {
         void setComponentClass(Class<? extends SketchComponent<?>> componentClass);
 
         /**
+         * @return The component class associated to this item.
+         */
+        Class<? extends SketchComponent<?>> getComponentClass();
+
+        /**
          * Insert a child.
          *
          * @param namespaceElement The namespace element associated to this element.

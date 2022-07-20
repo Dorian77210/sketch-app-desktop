@@ -2,6 +2,9 @@ package com.terbah.sketch.app.core.config;
 
 import com.terbah.sketch.api.SketchComponent;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author Dorian TERBAH
  * <p>
@@ -22,4 +25,9 @@ public interface SketchComponentConfigurationManager {
      * @return The configuration associated of the component.
      */
     SketchComponentConfiguration getConfigurationByComponentClass(Class<? extends SketchComponent> componentClass);
+
+    /**
+     * @return The list of all the available components.
+     */
+    Map<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> getComponentsClass();
 }

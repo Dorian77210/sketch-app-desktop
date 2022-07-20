@@ -169,10 +169,7 @@ public class DefaultSketchComponentTreeModel implements SketchComponentTreeModel
             return this.children;
         }
 
-        /**
-         *
-         * @return The component class.
-         */
+        @Override
         public Class<? extends SketchComponent<?>> getComponentClass()
         {
             return this.componentClass;

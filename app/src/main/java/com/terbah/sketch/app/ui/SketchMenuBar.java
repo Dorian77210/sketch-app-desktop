@@ -30,7 +30,7 @@ public class SketchMenuBar extends MenuBar
      */
     private Logger logger;
 
-    @Autowired
+    @PostConstruct
     private void setLogger() {
         this.logger = SketchLoggerManager.getLogger(this.getClass());
     }

@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="app" />
         <module name="sketch-api" />
+        <module name="natif-components" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="app" target="18" />
+      <module name="natif-components" target="18" />
       <module name="sketch-api" target="18" />
       <module name="sketch-app" target="1.5" />
     </bytecodeTargetLevel>

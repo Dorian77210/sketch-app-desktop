@@ -108,7 +108,7 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
 
             try {
                 Object result = currentComponent.execute();
-                this.logger.log(Level.FINE, "Result = {}", result);
+                this.logger.log(Level.FINE, "Result = {0}", result);
                 data.put(currentComponent, result);
             } catch (SketchComponentExecuteException e) {
                 this.logger.log(Level.SEVERE, String.format("Error during the execution of the component %s", currentComponent), e);

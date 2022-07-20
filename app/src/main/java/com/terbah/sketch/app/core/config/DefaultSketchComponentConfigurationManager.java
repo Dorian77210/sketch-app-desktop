@@ -10,7 +10,9 @@ import com.terbah.sketch.app.core.logger.SketchLoggerManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +36,7 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
         this.configurations = new HashMap<>();
     }
 
-    @Autowired
+    @PostConstruct
     public void setLogger() {
         this.logger = SketchLoggerManager.getLogger(this.getClass());
     }
@@ -48,7 +50,7 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
             return;
         }
 
-        this.logger.log(Level.FINE, "Register component {} ", componentClass);
+        this.logger.log(Level.FINE, "Register component {0} ", componentClass);
 
         String componentName = componentClass.getAnnotation(ComponentName.class).value();
         String namespace = componentClass.getAnnotation(ComponentNamespace.class).value();
@@ -68,7 +70,7 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
                 String paramName = method.getAnnotation(MethodInjectable.class).value();
                 Class<?> paramType = method.getParameterTypes()[0];
 
-                this.logger.log(Level.FINE, "Find the method to be an injectable method {} ", method);
+                this.logger.log(Level.FINE, "Find the method to be an injectable method {0} ", method);
 
                 configuration.addParameter(paramName, method, paramType);
             }
@@ -80,6 +82,11 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
     @Override
     public SketchComponentConfiguration getConfigurationByComponentClass(Class<? extends SketchComponent> componentClass) {
         return this.configurations.get(componentClass);
+    }
+
+    @Override
+    public Map<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> getComponentsClass() {
+        return this.configurations;
     }
 
     private boolean isInjectableMethod(Method method) {

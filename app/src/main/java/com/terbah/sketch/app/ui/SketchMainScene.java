@@ -31,6 +31,11 @@ public class SketchMainScene extends Scene {
     private SketchMenuBar menuBar;
 
     /**
+     * The tree view.
+     */
+    private SketchComponentTreeView treeView;
+
+    /**
      * The main layout of the application
      */
     private BorderPane mainLayout;
@@ -40,16 +45,19 @@ public class SketchMainScene extends Scene {
         this.menuBar = menuBar;
     }
 
+    @Autowired
+    private void setTreeView(SketchComponentTreeView treeView) {
+        this.treeView = treeView;
+    }
+
     @PostConstruct
     private void init() {
         this.mainLayout = (BorderPane) this.getRoot();
         this.mainLayout.setTop(this.menuBar);
-        System.out.println(this.menuBar);
+        this.mainLayout.setLeft(this.treeView);
     }
 
     public SketchMainScene() {
         super(new BorderPane(), SKETCH_APP_WIDTH, SKETCH_APP_HEIGHT);
     }
-
-
 }

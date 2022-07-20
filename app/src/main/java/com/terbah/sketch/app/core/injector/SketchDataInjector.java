@@ -7,6 +7,7 @@ import com.terbah.sketch.app.core.logger.SketchLoggerManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -30,7 +31,7 @@ public class SketchDataInjector {
      */
     private Logger logger;
 
-    @Autowired
+    @PostConstruct
     public void setLogger() {
         this.logger = SketchLoggerManager.getLogger(this.getClass());
     }
@@ -52,7 +53,7 @@ public class SketchDataInjector {
             try {
                 method.invoke(component, data);
             } catch (Exception exception) {
-                this.logger.log(Level.SEVERE, "Error during data injection in the component {}", component);
+                this.logger.log(Level.SEVERE, "Error during data injection in the component {0}", component);
                 return false;
             }
         }
