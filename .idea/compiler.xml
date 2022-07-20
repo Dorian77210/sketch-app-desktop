@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="app" />
         <module name="sketch-api" />
-        <module name="sketch-app" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
