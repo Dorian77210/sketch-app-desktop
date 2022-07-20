@@ -1,8 +1,13 @@
 package com.terbah.mock;
 
 import com.terbah.sketch.api.SketchComponent;
+import com.terbah.sketch.api.annotation.ComponentName;
+import com.terbah.sketch.api.annotation.ComponentNamespace;
 import com.terbah.sketch.api.annotation.MethodInjectable;
+import com.terbah.sketch.api.exception.SketchComponentExecuteException;
 
+@ComponentName("SketchComponentWithTwoString")
+@ComponentNamespace("Test/Mock")
 public class SketchComponentWithTwoString implements SketchComponent<String> {
 
     private String b;
@@ -24,7 +29,11 @@ public class SketchComponentWithTwoString implements SketchComponent<String> {
     }
 
     @Override
-    public String execute() {
+    public String execute() throws SketchComponentExecuteException {
+        if (this.a == null || this.b == null) {
+            throw new SketchComponentExecuteException("The two strings are null");
+        }
+
         return this.a + this.b;
     }
 }

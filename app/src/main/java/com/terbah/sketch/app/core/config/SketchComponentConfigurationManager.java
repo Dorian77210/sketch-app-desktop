@@ -21,7 +21,7 @@ public interface SketchComponentConfigurationManager {
 
     /**
      * @param componentClass The class for the component to get the associated configuration.
-     * @return The configuration associated of the component in an optional.
+     * @return The configuration associated of the component.
      */
-    Optional<SketchComponentConfiguration> getConfigurationByComponentClass(Class<? extends SketchComponent<?>> componentClass);
+    SketchComponentConfiguration getConfigurationByComponentClass(Class<? extends SketchComponent> componentClass);
 }

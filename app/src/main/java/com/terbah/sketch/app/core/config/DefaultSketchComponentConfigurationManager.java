@@ -1,15 +1,19 @@
 package com.terbah.sketch.app.core.config;
 
 import com.terbah.sketch.api.SketchComponent;
+import com.terbah.sketch.api.annotation.ComponentName;
+import com.terbah.sketch.api.annotation.ComponentNamespace;
 import com.terbah.sketch.api.annotation.MethodInjectable;
+import com.terbah.sketch.app.core.config.validator.SketchComponentMissingRequiredAnnotation;
+import com.terbah.sketch.app.core.config.validator.SketchComponentValidator;
 import com.terbah.sketch.app.core.logger.SketchLoggerManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +23,12 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
     private final Map<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> configurations;
 
     private Logger logger;
+
+    /**
+     * List of available validators
+     */
+    @Autowired
+    private List<SketchComponentValidator> validators;
 
     public DefaultSketchComponentConfigurationManager() {
         this.configurations = new HashMap<>();
@@ -31,9 +41,19 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
 
     @Override
     public void registerComponent(Class<? extends SketchComponent<?>> componentClass) {
+        try {
+            this.validate(componentClass);
+        } catch (SketchComponentMissingRequiredAnnotation exception) {
+            this.logger.log(Level.SEVERE, "Error during the register of the component " + componentClass, exception);
+            return;
+        }
+
         this.logger.log(Level.FINE, "Register component " + componentClass);
 
-        SketchComponentConfiguration configuration = new SketchComponentConfiguration();
+        String componentName = componentClass.getAnnotation(ComponentName.class).value();
+        String namespace = componentClass.getAnnotation(ComponentNamespace.class).value();
+
+        SketchComponentConfiguration configuration = new SketchComponentConfiguration(componentName, namespace);
         try {
             configuration.setReturnType(componentClass.getMethod("execute").getReturnType());
         } catch (NoSuchMethodException e) {
@@ -58,11 +78,25 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
     }
 
     @Override
-    public Optional<SketchComponentConfiguration> getConfigurationByComponentClass(Class<? extends SketchComponent<?>> componentClass) {
-        return Optional.ofNullable(this.configurations.get(componentClass));
+    public SketchComponentConfiguration getConfigurationByComponentClass(Class<? extends SketchComponent> componentClass) {
+        return this.configurations.get(componentClass);
     }
 
     private boolean isInjectableMethod(Method method) {
         return method.isAnnotationPresent(MethodInjectable.class) && method.getParameterCount() == 1;
+    }
+
+    /**
+     * Check if a component has the waiting annotations to well define a component.
+     *
+     * @param componentClass The component's class
+     * @throws SketchComponentMissingRequiredAnnotation if there miss a required annotation in the component's class.
+     */
+    private void validate(Class<? extends SketchComponent<?>> componentClass) throws SketchComponentMissingRequiredAnnotation {
+        for (SketchComponentValidator validator : this.validators) {
+            if (!validator.validate(componentClass)) {
+                throw new SketchComponentMissingRequiredAnnotation("The component " + componentClass + " is not a valid component. It doesn't pass the validator " + validator.getClass());
+            }
+        }
     }
 }

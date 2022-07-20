@@ -1,14 +1,18 @@
 package com.terbah.mock;
 
 import com.terbah.sketch.api.SketchComponent;
+import com.terbah.sketch.api.annotation.ComponentName;
+import com.terbah.sketch.api.annotation.ComponentNamespace;
 import com.terbah.sketch.api.annotation.MethodInjectable;
 
+@ComponentName("SketchComponentWithString")
+@ComponentNamespace("Test/Mock")
 public class SketchComponentWithStringParam implements SketchComponent<String> {
 
     private String data;
 
     public SketchComponentWithStringParam() {
-        this.data = "";
+        this.data = "data test";
     }
 
     @MethodInjectable("data")

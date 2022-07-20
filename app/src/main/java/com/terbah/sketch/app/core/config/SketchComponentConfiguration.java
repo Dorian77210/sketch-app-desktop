@@ -27,11 +27,38 @@ public class SketchComponentConfiguration {
     private Class<?> returnType;
 
     /**
+     * Name of the component.
+     */
+    private final String componentName;
+
+    /**
+     * Namespace of the component.
+     */
+    private final String namespace;
+
+    /**
      * Constructor of the class <code>SketchComponentConfiguration</code>
      */
-    public SketchComponentConfiguration() {
+    public SketchComponentConfiguration(String componentName, String namespace) {
         this.methodsToInject = new HashMap<>();
         this.returnType = null;
+
+        this.componentName = componentName;
+        this.namespace = namespace;
+    }
+
+    /**
+     * @return The name of the component.
+     */
+    public String getComponentName() {
+        return this.componentName;
+    }
+
+    /**
+     * @return The namespace.
+     */
+    public String getNamespace() {
+        return this.namespace;
     }
 
     /**
@@ -73,7 +100,7 @@ public class SketchComponentConfiguration {
      * Class that stored an association between a method, and it's first parameter type.
      * @version 1.0
      */
-    static class SketchInjectableMethod {
+    public static class SketchInjectableMethod {
 
         /**
          * The associated method.
