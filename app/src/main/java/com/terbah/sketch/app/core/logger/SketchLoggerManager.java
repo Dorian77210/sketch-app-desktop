@@ -15,8 +15,10 @@ import java.util.logging.Logger;
  */
 public class SketchLoggerManager {
 
-    public SketchLoggerManager() {
-
+    SketchLoggerManager() {
+        /**
+         * Empty constructor because it is not used
+         */
     }
 
     private static final Map<Class<?>, Logger> LOGGERS = new HashMap<>();

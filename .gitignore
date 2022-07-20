@@ -79,4 +79,5 @@ fabric.properties
 /target/**
 lib/
 */target
+**/*.class
 app/target

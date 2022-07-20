@@ -53,9 +53,12 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
         this.orphanComponents.add(component);
     }
 
-    @Override
-    public boolean execute(SketchComponent<?> component) {
-        Map<SketchComponent<?>, Object> data = new HashMap<>();
+    /**
+     * Build a deque with the parents and the parents of the parents etc of the component
+     * @param component The component which one the algo has to find the parents.
+     * @return The deque with all the parents
+     */
+    private Deque<SketchComponent<?>> buildComponentQueue(SketchComponent<?> component) {
         Deque<SketchComponent<?>> componentStack = new ArrayDeque<>();
         List<SketchComponent<?>> currentComponents = new ArrayList<>();
         currentComponents.add(component);
@@ -78,6 +81,14 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
             currentComponents.clear();
             currentComponents.addAll(tmpComponents);
         }
+
+        return componentStack;
+    }
+
+    @Override
+    public boolean execute(SketchComponent<?> component) {
+        Map<SketchComponent<?>, Object> data = new HashMap<>();
+        Deque<SketchComponent<?>> componentStack = this.buildComponentQueue(component);
 
         // execute each components
         while (!componentStack.isEmpty()) {
