@@ -1,6 +1,7 @@
 package com.terbah.sketch.app.ui.board;
 
 import com.terbah.sketch.app.core.config.SketchComponentConfiguration;
+import com.terbah.sketch.app.ui.controller.SketchBoardControllerMediator;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
@@ -33,5 +34,14 @@ public class SketchComponentUI extends BorderPane {
         this.setPrefSize(SKETCH_COMPONENT_UI_WIDTH, SKETCH_COMPONENT_UI_HEIGHT);
         Button button = new Button("button");
         this.setCenter(button);
+    }
+
+    /**
+     * Set up the UI.
+     *
+     * @param mediator The mediator associated to this ui.
+     */
+    public void setup(SketchBoardControllerMediator mediator) {
+
     }
 }

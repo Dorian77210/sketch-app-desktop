@@ -54,6 +54,8 @@ public class SketchBoardControllerMediator {
         if (component != null) {
             this.worflow.insertComponent(component);
             SketchComponentUI ui = this.boardManager.createUIFor(component);
+            ui.setup(this);
+
             ui.setLayoutX(event.getX());
             ui.setLayoutY(event.getY());
             this.board.getChildren().add(ui);

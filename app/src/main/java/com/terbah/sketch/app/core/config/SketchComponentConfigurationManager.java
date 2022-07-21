@@ -1,8 +1,6 @@
 package com.terbah.sketch.app.core.config;
 
 import com.terbah.sketch.api.SketchComponent;
-
-import java.util.List;
 import java.util.Map;
 
 /**

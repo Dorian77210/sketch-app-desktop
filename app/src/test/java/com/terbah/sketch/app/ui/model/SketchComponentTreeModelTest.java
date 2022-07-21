@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = SpringConfiguration.class)
-public class SketchComponentTreeModelTest {
+class SketchComponentTreeModelTest {
 
     @Autowired
     private SketchComponentConfigurationManager configurationManager;

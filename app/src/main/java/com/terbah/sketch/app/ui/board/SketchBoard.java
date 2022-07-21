@@ -12,6 +12,6 @@ import javafx.scene.layout.Pane;
 public class SketchBoard extends Pane {
 
     public SketchBoard() {
-
+        // Empty for the moment
     }
 }

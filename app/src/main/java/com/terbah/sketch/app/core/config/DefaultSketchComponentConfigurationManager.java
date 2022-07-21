@@ -9,10 +9,8 @@ import com.terbah.sketch.app.core.config.validator.SketchComponentValidator;
 import com.terbah.sketch.app.core.logger.SketchLoggerManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
