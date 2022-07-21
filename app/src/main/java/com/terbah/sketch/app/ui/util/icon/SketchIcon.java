@@ -1,4 +1,4 @@
-package com.terbah.sketch.app.ui.util;
+package com.terbah.sketch.app.ui.util.icon;
 
 /**
  * @author Dorian TERBAH

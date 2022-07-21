@@ -1,4 +1,4 @@
-package com.terbah.sketch.app.ui.util;
+package com.terbah.sketch.app.ui.util.icon;
 
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -9,7 +9,7 @@ import org.controlsfx.glyphfont.GlyphFontRegistry;
 
 import java.util.Map;
 
-class DefaultGlyphBuilder implements GlyphBuilder {
+class DefaultIconBuilder implements IconBuilder {
 
     /**
      * Font used to create icons.

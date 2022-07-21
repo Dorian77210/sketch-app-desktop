@@ -1,4 +1,4 @@
-package com.terbah.sketch.app.ui.util;
+package com.terbah.sketch.app.ui.util.icon;
 
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
  *
  * @version 1.0
  */
-public interface GlyphBuilder {
+public interface IconBuilder {
 
     /**
      * Get an icon associated to an enumeration.
@@ -32,7 +32,7 @@ public interface GlyphBuilder {
     /**
      * @return A new builder.
      */
-    static GlyphBuilder builder() {
-        return new DefaultGlyphBuilder();
+    static IconBuilder builder() {
+        return new DefaultIconBuilder();
     }
 }

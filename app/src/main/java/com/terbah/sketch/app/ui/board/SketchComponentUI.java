@@ -2,9 +2,17 @@ package com.terbah.sketch.app.ui.board;
 
 import com.terbah.sketch.app.core.config.SketchComponentConfiguration;
 import com.terbah.sketch.app.ui.controller.SketchBoardControllerMediator;
+import com.terbah.sketch.app.ui.util.icon.IconBuilder;
+import com.terbah.sketch.app.ui.util.icon.SketchIcon;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 import org.controlsfx.glyphfont.FontAwesome;
@@ -55,10 +63,17 @@ public class SketchComponentUI extends BorderPane {
         this.setPrefSize(SKETCH_COMPONENT_UI_WIDTH, SKETCH_COMPONENT_UI_HEIGHT);
 
         // build the description UI.
-        VBox descriptionUI = new VBox();
+        VBox descriptionUI = new VBox(10);
+        descriptionUI.setAlignment(Pos.CENTER);
         Label nameLabel = new Label(configuration.getComponentName());
         nameLabel.setWrapText(true);
         nameLabel.setTextAlignment(TextAlignment.CENTER);
+        Button playButton = new Button();
+        playButton.setGraphic(IconBuilder.builder().getIcon(SketchIcon.PLAY, Color.GREEN));
+        descriptionUI.getChildren().addAll(nameLabel, playButton);
         this.setCenter(descriptionUI);
+
+
+        this.setStyle("-fx-background-color: yellow;");
     }
 }
