@@ -12,11 +12,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 
+import javafx.util.Duration;
 import org.controlsfx.glyphfont.FontAwesome;
 import org.controlsfx.glyphfont.Glyph;
 import org.controlsfx.glyphfont.GlyphFont;
@@ -101,8 +103,10 @@ public class SketchComponentUI extends BorderPane {
         // create the entries
         for (Map.Entry<String, Class<?>> entry : entries.entrySet()) {
             String entryName = entry.getKey();
-            Class<?> associatedType = entry.getValue();
+            Tooltip tooltip = new Tooltip(entryName);
+            tooltip.setShowDelay(Duration.millis(500.0));
             SketchComponentSlot entrySlot = new SketchComponentSlot(SketchComponentSlotType.ENTRY, entryName);
+            entrySlot.setTooltip(tooltip);
             entrySlot.setOnMouseClicked(event -> mediator.addSelectedSlot(entrySlot));
             entrySlot.setMinHeight(space);
             entrySlot.setMinWidth(ENTRY_WIDTH);
