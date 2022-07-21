@@ -102,7 +102,8 @@ public class SketchComponentUI extends BorderPane {
         for (Map.Entry<String, Class<?>> entry : entries.entrySet()) {
             String entryName = entry.getKey();
             Class<?> associatedType = entry.getValue();
-            SketchComponentSlot entrySlot = new SketchComponentSlot(SketchComponentSlotType.ENTRY, entryName, associatedType);
+            SketchComponentSlot entrySlot = new SketchComponentSlot(SketchComponentSlotType.ENTRY, entryName);
+            entrySlot.setOnMouseClicked(event -> mediator.addSelectedSlot(entrySlot));
             entrySlot.setMinHeight(space);
             entrySlot.setMinWidth(ENTRY_WIDTH);
             entryPane.getChildren().add(entrySlot);
@@ -115,7 +116,8 @@ public class SketchComponentUI extends BorderPane {
         if (returnType != null) {
             VBox outputPane = new VBox();
             outputPane.setAlignment(Pos.CENTER);
-            SketchComponentSlot outputSlot = new SketchComponentSlot(SketchComponentSlotType.OUTPUT, returnType);
+            SketchComponentSlot outputSlot = new SketchComponentSlot(SketchComponentSlotType.OUTPUT);
+            outputSlot.setOnMouseClicked(event -> mediator.addSelectedSlot(outputSlot));
             outputSlot.setMinWidth(ENTRY_WIDTH);
             outputSlot.setMinHeight(ENTRY_HEIGHT);
             outputPane.getChildren().add(outputSlot);

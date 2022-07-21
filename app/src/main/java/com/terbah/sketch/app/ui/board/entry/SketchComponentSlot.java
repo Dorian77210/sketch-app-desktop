@@ -17,24 +17,18 @@ public class SketchComponentSlot extends Label {
     private final String entryName;
 
     /**
-     * The associated type for the slot.
-     */
-    private final Class<?> associatedType;
-
-    /**
      * Type of the slot.
      */
     private final SketchComponentSlotType slotType;
 
-    public SketchComponentSlot(SketchComponentSlotType slotType, Class<?> type) {
-        this(slotType, null, type);
+    public SketchComponentSlot(SketchComponentSlotType slotType) {
+        this(slotType, null);
     }
 
-    public SketchComponentSlot(SketchComponentSlotType slotType, String entryName, Class<?> type) {
+    public SketchComponentSlot(SketchComponentSlotType slotType, String entryName) {
         super();
         this.entryName = entryName;
         this.slotType = slotType;
-        this.associatedType = type;
         this.setStyle("-fx-background-color: black;");
     }
 
@@ -44,8 +38,5 @@ public class SketchComponentSlot extends Label {
 
     public SketchComponentSlotType getSlotType() {
         return slotType;
-    }
-    Class<?> getAssociatedType() {
-        return associatedType;
     }
 }

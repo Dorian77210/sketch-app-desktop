@@ -17,5 +17,14 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface MethodInjectable {
+    /**
+     * @return The name of the entry.
+     */
     String value();
+
+    /**
+     * @return The order of the entry. It has an importance for the
+     * displaying of entries in the UI.
+     */
+    int order() default 0;
 }

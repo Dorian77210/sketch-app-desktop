@@ -1,7 +1,7 @@
 package com.terbah.sketch.app.core.config;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,7 +40,7 @@ public class SketchComponentConfiguration {
      * Constructor of the class <code>SketchComponentConfiguration</code>
      */
     public SketchComponentConfiguration(String componentName, String namespace) {
-        this.methodsToInject = new HashMap<>();
+        this.methodsToInject = new LinkedHashMap<>();
         this.returnType = null;
 
         this.componentName = componentName;
@@ -98,7 +98,7 @@ public class SketchComponentConfiguration {
      * @return The entries with their entry class.
      */
     public Map<String, Class<?>> getEntries() {
-        Map<String, Class<?>> entries = new HashMap<>();
+        Map<String, Class<?>> entries = new LinkedHashMap<>();
         this.methodsToInject.forEach((key, value) -> entries.put(key, value.getParamType()));
         return entries;
     }

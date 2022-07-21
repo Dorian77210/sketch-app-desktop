@@ -30,12 +30,12 @@ public class SketchSequenceComponent implements SketchComponent<NumberList> {
      */
     private Number end;
 
-    @MethodInjectable("begin")
+    @MethodInjectable(value = "begin", order = 1)
     public void setBegin(Number begin) {
         this.begin = begin;
     }
 
-    @MethodInjectable("end")
+    @MethodInjectable(value = "end", order = 2)
     public void setEnd(Number end) {
         this.end = end;
     }
