@@ -2,8 +2,15 @@ package com.terbah.sketch.app.ui.board;
 
 import com.terbah.sketch.app.core.config.SketchComponentConfiguration;
 import com.terbah.sketch.app.ui.controller.SketchBoardControllerMediator;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
+
+import org.controlsfx.glyphfont.FontAwesome;
+import org.controlsfx.glyphfont.Glyph;
+import org.controlsfx.glyphfont.GlyphFont;
+import org.controlsfx.glyphfont.GlyphFontRegistry;
 
 /**
  * @author Dorian TERBAH
@@ -25,15 +32,18 @@ public class SketchComponentUI extends BorderPane {
     static final double SKETCH_COMPONENT_UI_WIDTH = 120.0;
 
     /**
+     * Associated configuration.
+     */
+    private final SketchComponentConfiguration configuration;
+
+    /**
      * Constructor
      *
      * @param configuration The configuration of the associated component.
      */
     public SketchComponentUI(SketchComponentConfiguration configuration) {
         super();
-        this.setPrefSize(SKETCH_COMPONENT_UI_WIDTH, SKETCH_COMPONENT_UI_HEIGHT);
-        Button button = new Button("button");
-        this.setCenter(button);
+        this.configuration = configuration;
     }
 
     /**
@@ -42,6 +52,13 @@ public class SketchComponentUI extends BorderPane {
      * @param mediator The mediator associated to this ui.
      */
     public void setup(SketchBoardControllerMediator mediator) {
+        this.setPrefSize(SKETCH_COMPONENT_UI_WIDTH, SKETCH_COMPONENT_UI_HEIGHT);
 
+        // build the description UI.
+        VBox descriptionUI = new VBox();
+        Label nameLabel = new Label(configuration.getComponentName());
+        nameLabel.setWrapText(true);
+        nameLabel.setTextAlignment(TextAlignment.CENTER);
+        this.setCenter(descriptionUI);
     }
 }

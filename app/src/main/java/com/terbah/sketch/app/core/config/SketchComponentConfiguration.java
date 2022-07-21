@@ -73,11 +73,11 @@ public class SketchComponentConfiguration {
      *
      * @param returnType The new value
      */
-    public void setReturnType(Class<?> returnType) {
+    void setReturnType(Class<?> returnType) {
         this.returnType = returnType;
     }
 
-    public void addParameter(String paramName, Method method, Class<?> paramType) {
+    void addParameter(String paramName, Method method, Class<?> paramType) {
         this.methodsToInject.put(paramName, new SketchInjectableMethod(method, paramType));
     }
 
