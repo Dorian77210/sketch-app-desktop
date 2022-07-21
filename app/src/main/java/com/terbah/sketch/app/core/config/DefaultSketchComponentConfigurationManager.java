@@ -85,7 +85,7 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
     }
 
     @Override
-    public Map<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> getComponentsClass() {
+    public Map<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> getConfigurations() {
         return this.configurations;
     }
 

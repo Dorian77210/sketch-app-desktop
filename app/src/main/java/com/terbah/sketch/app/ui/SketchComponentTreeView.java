@@ -83,7 +83,7 @@ public class SketchComponentTreeView extends BorderPane {
     public void filterBy(final String filter)
     {
         // Create the associated model
-        for (Map.Entry<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> entry : this.configurationManager.getComponentsClass().entrySet()) {
+        for (Map.Entry<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> entry : this.configurationManager.getConfigurations().entrySet()) {
             SketchComponentConfiguration configuration = entry.getValue();
             String namespace = configuration.getNamespace().toLowerCase();
 

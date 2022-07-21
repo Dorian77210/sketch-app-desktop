@@ -27,7 +27,7 @@ public interface SketchComponentConfigurationManager {
     SketchComponentConfiguration getConfigurationByComponentClass(Class<? extends SketchComponent> componentClass);
 
     /**
-     * @return The list of all the available components.
+     * @return The list of all the configurations.
      */
-    Map<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> getComponentsClass();
+    Map<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> getConfigurations();
 }

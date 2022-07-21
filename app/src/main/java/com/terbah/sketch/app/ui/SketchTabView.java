@@ -27,7 +27,6 @@ public class SketchTabView extends TabPane {
 
     @PostConstruct
     public void init() {
-        System.out.println(this.boardManager);
         Tab sketchBoardTab = new Tab("Sketch", this.boardManager.createSketchBoard());
         this.getTabs().add(sketchBoardTab);
     }
