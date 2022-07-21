@@ -82,10 +82,11 @@ public class SketchComponentTreeView extends BorderPane {
 
     public void filterBy(final String filter)
     {
+        this.treeModel.clear();
         // Create the associated model
         for (Map.Entry<Class<? extends SketchComponent<?>>, SketchComponentConfiguration> entry : this.configurationManager.getConfigurations().entrySet()) {
             SketchComponentConfiguration configuration = entry.getValue();
-            String namespace = configuration.getNamespace().toLowerCase();
+            String namespace = String.format("%s/%s", configuration.getNamespace().toLowerCase(), configuration.getComponentName());
 
             if (namespace.contains(filter.toLowerCase()))
             {
