@@ -62,10 +62,10 @@ public class SketchComponentConfiguration {
     }
 
     /**
-     * @return the return type of the corresponding component class.
+     * @return the return type of the corresponding component class, or null if it is Void.
      */
     public Class<?> getReturnType() {
-        return this.returnType;
+        return this.returnType.equals(Void.class) ? null : this.returnType;
     }
 
     /**
@@ -92,6 +92,15 @@ public class SketchComponentConfiguration {
 
     public Optional<SketchInjectableMethod> getMethodInjectable(String entryName) {
         return Optional.ofNullable(this.methodsToInject.get(entryName));
+    }
+
+    /**
+     * @return The entries with their entry class.
+     */
+    public Map<String, Class<?>> getEntries() {
+        Map<String, Class<?>> entries = new HashMap<>();
+        this.methodsToInject.forEach((key, value) -> entries.put(key, value.getParamType()));
+        return entries;
     }
 
     /**
