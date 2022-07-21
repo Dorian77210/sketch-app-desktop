@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,8 +50,9 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
 
         String componentName = componentClass.getAnnotation(ComponentName.class).value();
         String namespace = componentClass.getAnnotation(ComponentNamespace.class).value();
-
+        List<SketchComponentEntry> entries = new ArrayList<>();
         SketchComponentConfiguration configuration = new SketchComponentConfiguration(componentName, namespace);
+
         try {
             configuration.setReturnType(componentClass.getMethod("execute").getReturnType());
         } catch (NoSuchMethodException e) {
@@ -65,13 +64,19 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
         for (Method method : methods) {
             if (this.isInjectableMethod(method)) {
                 // register this method
-                String paramName = method.getAnnotation(MethodInjectable.class).value();
+                MethodInjectable annotation = method.getAnnotation(MethodInjectable.class);
+                String paramName = annotation.value();
+                int order = annotation.order();
                 Class<?> paramType = method.getParameterTypes()[0];
-
                 this.logger.log(Level.FINE, "Find the method to be an injectable method {0} ", method);
-
-                configuration.addParameter(paramName, method, paramType);
+                entries.add(new SketchComponentEntry(paramName, method, paramType, order));
             }
+        }
+
+        // add the entries in the configuration, following the orders
+        Collections.sort(entries);
+        for (SketchComponentEntry entry : entries) {
+            configuration.addParameter(entry.entryName(), entry.method(), entry.entryType());
         }
 
         this.configurations.put(componentClass, configuration);
