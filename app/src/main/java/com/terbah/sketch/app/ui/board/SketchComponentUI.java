@@ -51,7 +51,7 @@ public class SketchComponentUI extends BorderPane {
     /**
      * Height of an entry.
      */
-    private static final double ENTRY_HEIGHT = SKETCH_COMPONENT_UI_HEIGHT / 5;
+    private static final double ENTRY_HEIGHT = SKETCH_COMPONENT_UI_HEIGHT / 4;
 
 
     /**
@@ -110,7 +110,17 @@ public class SketchComponentUI extends BorderPane {
 
         this.setLeft(entryPane);
 
-        // output pane
+        // output pane //
+        Class<?> returnType = this.configuration.getReturnType();
+        if (returnType != null) {
+            VBox outputPane = new VBox();
+            outputPane.setAlignment(Pos.CENTER);
+            SketchComponentSlot outputSlot = new SketchComponentSlot(SketchComponentSlotType.OUTPUT, returnType);
+            outputSlot.setMinWidth(ENTRY_WIDTH);
+            outputSlot.setMinHeight(ENTRY_HEIGHT);
+            outputPane.getChildren().add(outputSlot);
+            this.setRight(outputPane);
+        }
 
         this.setStyle("-fx-background-color: yellow;");
     }
