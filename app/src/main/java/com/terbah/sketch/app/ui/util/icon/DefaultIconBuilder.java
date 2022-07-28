@@ -26,12 +26,12 @@ class DefaultIconBuilder implements IconBuilder {
 
     @Override
     public Node getIcon(SketchIcon icon) {
-        return FONT.create(icon);
+        return getIcon(icon, Color.BLACK);
     }
 
     @Override
     public Node getIcon(SketchIcon icon, Color color) {
-        Glyph glyph = FONT.create(icon);
+        Glyph glyph = FONT.create(ICONS.get(icon));
         glyph.setColor(color);
         return glyph;
     }
