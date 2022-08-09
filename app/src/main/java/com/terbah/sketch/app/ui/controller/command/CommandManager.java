@@ -1,6 +1,7 @@
 package com.terbah.sketch.app.ui.controller.command;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * @author Dorian TERBAH
@@ -11,7 +12,7 @@ import java.util.Stack;
  */
 public final class CommandManager {
 
-    private static final Stack<Command> history = new Stack<>();
+    private static final Deque<Command> history = new ArrayDeque<>();
 
     public static void executeCommand(Command command) {
         if (command.execute()) {

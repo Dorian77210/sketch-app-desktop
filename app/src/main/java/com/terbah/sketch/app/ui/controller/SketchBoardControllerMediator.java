@@ -4,6 +4,7 @@ import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.app.core.board.SketchBoardManager;
 import com.terbah.sketch.app.core.logger.SketchLoggerManager;
 import com.terbah.sketch.app.core.workflow.SketchComponentWorkflow;
+import com.terbah.sketch.app.ui.board.SketchArrow;
 import com.terbah.sketch.app.ui.board.SketchBoard;
 import com.terbah.sketch.app.ui.board.SketchComponentUI;
 import com.terbah.sketch.app.ui.board.entry.SketchComponentSlot;
@@ -187,8 +188,10 @@ public class SketchBoardControllerMediator {
 
         // add an order for the entries.
         this.selectedSlots.push(slot);
+        System.out.println("select");
         slot.select();
         if (this.selectedSlots.size() == 2) {
+            System.out.println("created");
             SketchComponentSlot childSlot = this.selectedSlots.pop();
             SketchComponentSlot parentSlot = this.selectedSlots.pop();
 
@@ -204,7 +207,20 @@ public class SketchBoardControllerMediator {
 
             childSlot.unselect();
             parentSlot.unselect();
+
+            this.createLinkBetween(parentSlot, childSlot);
         }
+    }
+
+    /**
+     * Create an UI association between two slots.
+     *
+     * @param source The source of the association.
+     * @param destination The destination of the association.
+     */
+    private void createLinkBetween(SketchComponentSlot source, SketchComponentSlot destination) {
+        SketchArrow arrow = SketchArrow.fromSourceAndDestination(source, destination);
+        this.board.getChildren().add(arrow);
     }
 
     public List<SketchComponent<?>> getSelectedComponents() {

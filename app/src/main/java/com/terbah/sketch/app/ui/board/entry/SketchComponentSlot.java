@@ -1,7 +1,8 @@
 package com.terbah.sketch.app.ui.board.entry;
+
 import com.terbah.sketch.api.SketchComponent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 /**
  * @author Dorian TERBAH
@@ -10,17 +11,17 @@ import javafx.scene.control.Label;
  *
  * @version 1.0
  */
-public class SketchComponentSlot extends Label {
+public class SketchComponentSlot extends Rectangle {
 
     /**
      * Style when the slot is selected.
      */
-    private static final String SELECTED_STYLE = "-fx-background-color: red;";
+    private static final Color SELECTED_COLOR = Color.RED;
 
     /**
      * Style when the slot is unselected.
      */
-    private static final String UNSELECTED_STYLE = "-fx-background-color: black;";
+    private static final Color UNSELECTED_COLOR = Color.BLACK;
 
     /**
      * Optional value if the slot is an entry.
@@ -52,13 +53,11 @@ public class SketchComponentSlot extends Label {
         this.slotType = slotType;
         this.associatedComponent = associatedComponent;
         this.isSelected = false;
-
-        this.setStyle("-fx-background-color: black;");
+        this.updateStyle();
     }
 
     private void updateStyle() {
-        String style = this.isSelected ? SELECTED_STYLE : UNSELECTED_STYLE;
-        this.setStyle(style);
+        this.setFill(this.isSelected ? SELECTED_COLOR : UNSELECTED_COLOR);
     }
 
     public String getEntryName() {

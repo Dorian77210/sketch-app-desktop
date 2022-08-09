@@ -16,7 +16,7 @@ public abstract class Command {
      */
     protected SketchBoardControllerMediator mediator;
 
-    public Command(SketchBoardControllerMediator mediator) {
+    protected Command(SketchBoardControllerMediator mediator) {
         this.mediator = mediator;
     }
 

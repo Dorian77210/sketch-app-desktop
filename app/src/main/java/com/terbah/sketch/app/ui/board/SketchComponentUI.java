@@ -110,16 +110,23 @@ public class SketchComponentUI extends BorderPane {
         entryPane.setPadding(new Insets(space, 0.0, space, 0.0));
 
         // create the entries
+        int entryCount = 0;
         for (Map.Entry<String, Class<?>> entry : entries.entrySet()) {
             String entryName = entry.getKey();
             Tooltip tooltip = new Tooltip(entryName);
             tooltip.setShowDelay(Duration.millis(500.0));
             SketchComponentSlot entrySlot = new SketchComponentSlot(SketchComponentSlotType.ENTRY, associatedComponent, entryName);
-            entrySlot.setTooltip(tooltip);
+
+            entrySlot.xProperty().bind(this.layoutXProperty());
+            entrySlot.yProperty().bind(this.layoutYProperty().add((space * 1.5) + (entryCount * 2 * space)));
+
+            Tooltip.install(entrySlot, tooltip);
             entrySlot.setOnMouseClicked(event -> mediator.addSelectedSlot(entrySlot));
-            entrySlot.setMinHeight(space);
-            entrySlot.setMinWidth(ENTRY_WIDTH);
+            entrySlot.setHeight(space);
+            entrySlot.setWidth(ENTRY_WIDTH);
             entryPane.getChildren().add(entrySlot);
+
+            entryCount++;
         }
 
         this.setLeft(entryPane);
@@ -130,9 +137,13 @@ public class SketchComponentUI extends BorderPane {
             VBox outputPane = new VBox();
             outputPane.setAlignment(Pos.CENTER);
             SketchComponentSlot outputSlot = new SketchComponentSlot(SketchComponentSlotType.OUTPUT, associatedComponent);
+
+            outputSlot.xProperty().bind(this.layoutXProperty().add(SKETCH_COMPONENT_UI_WIDTH));
+            outputSlot.yProperty().bind(this.layoutYProperty().add(SKETCH_COMPONENT_UI_HEIGHT / 2));
+
             outputSlot.setOnMouseClicked(event -> mediator.addSelectedSlot(outputSlot));
-            outputSlot.setMinWidth(ENTRY_WIDTH);
-            outputSlot.setMinHeight(ENTRY_HEIGHT);
+            outputSlot.setWidth(ENTRY_WIDTH);
+            outputSlot.setHeight(ENTRY_HEIGHT);
             outputPane.getChildren().add(outputSlot);
             this.setRight(outputPane);
         }

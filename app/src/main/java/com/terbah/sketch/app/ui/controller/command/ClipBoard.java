@@ -1,8 +1,6 @@
 package com.terbah.sketch.app.ui.controller.command;
 
 import com.terbah.sketch.api.SketchComponent;
-
-import javax.sound.sampled.Clip;
 import java.util.ArrayList;
 import java.util.List;
 
