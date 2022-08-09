@@ -1,22 +1,15 @@
 package com.terbah.sketch.app.core.workflow;
 
+import com.terbah.SpringTestConfiguration;
 import com.terbah.mock.SketchComponentWithIntParam;
 import com.terbah.mock.SketchComponentWithStringParam;
 import com.terbah.mock.SketchComponentWithTwoString;
-import com.terbah.sketch.app.SpringConfiguration;
 import com.terbah.sketch.app.core.config.SketchComponentConfigurationManager;
-import com.terbah.sketch.app.core.injector.SketchDataInjector;
-import com.terbah.sketch.app.core.workflow.DefaultSketchComponentWorkflow;
-import com.terbah.sketch.app.core.workflow.SketchComponentWorkflow;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.event.annotation.BeforeTestClass;
-import org.springframework.test.context.event.annotation.BeforeTestExecution;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -27,8 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @version 1.0
  */
 
-@SpringBootTest(classes = SpringConfiguration.class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@SpringBootTest(classes = SpringTestConfiguration.class)
 class SketchComponentWorkflowTest {
 
     private SketchComponentWorkflow workflow;
@@ -102,6 +94,18 @@ class SketchComponentWorkflowTest {
 
         this.workflow.clear();
 
+        assertFalse(this.workflow.existsLinkBetween(a, c, "a"));
+        assertFalse(this.workflow.existsLinkBetween(a, c, "b"));
+    }
+
+    @Test
+    void testDeleteComponent() {
+        SketchComponentWithStringParam a = new SketchComponentWithStringParam();
+        SketchComponentWithTwoString c = new SketchComponentWithTwoString();
+        assertTrue(this.workflow.createLinkBetween(a, c, "a"));
+        assertTrue(this.workflow.createLinkBetween(a, c, "b"));
+
+        this.workflow.deleteComponent(a);
         assertFalse(this.workflow.existsLinkBetween(a, c, "a"));
         assertFalse(this.workflow.existsLinkBetween(a, c, "b"));
     }

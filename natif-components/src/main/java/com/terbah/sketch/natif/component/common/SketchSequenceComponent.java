@@ -30,6 +30,11 @@ public class SketchSequenceComponent implements SketchComponent<NumberList> {
      */
     private Number end;
 
+    /**
+     * Step of the sequence.
+     */
+    private Number step;
+
     @MethodInjectable(value = "begin", order = 1)
     public void setBegin(Number begin) {
         this.begin = begin;
@@ -45,5 +50,14 @@ public class SketchSequenceComponent implements SketchComponent<NumberList> {
     @Override
     public NumberList execute() throws SketchComponentExecuteException {
         return new NumberList();
+    }
+
+    @Override
+    public SketchComponent<NumberList> copy() {
+        SketchSequenceComponent component = new SketchSequenceComponent();
+        component.begin = this.begin;
+        component.end = this.end;
+        component.step = this.step;
+        return component;
     }
 }

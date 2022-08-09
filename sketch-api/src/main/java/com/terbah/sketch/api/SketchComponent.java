@@ -17,4 +17,9 @@ public interface SketchComponent<T> {
      * @return The computed result of the result.
      */
     T execute() throws SketchComponentExecuteException;
+
+    /**
+     * @return A copy of the component.
+     */
+    SketchComponent<T> copy();
 }

@@ -3,12 +3,15 @@ package com.terbah.sketch.app.core.board;
 import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.app.core.workflow.SketchComponentWorkflow;
 import com.terbah.sketch.app.core.workflow.SketchComponentWorkflowFactory;
+import com.terbah.sketch.app.ui.SketchMainScene;
 import com.terbah.sketch.app.ui.board.SketchBoard;
 import com.terbah.sketch.app.ui.board.SketchComponentUI;
 import com.terbah.sketch.app.ui.controller.SketchBoardControllerMediator;
+import com.terbah.sketch.app.ui.controller.SketchKeyboardController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +45,12 @@ public class DefaultSketchBoardManager implements SketchBoardManager {
     private SketchComponentUIFactory uiFactory;
 
     /**
+     * Scene of the app.
+     */
+    @Autowired
+    private SketchMainScene mainScene;
+
+    /**
      * Component class selected in the tree view.
      */
     private Class<? extends SketchComponent<?>> componentClassSelected;
@@ -58,6 +67,11 @@ public class DefaultSketchBoardManager implements SketchBoardManager {
 
     public DefaultSketchBoardManager() {
         this.mediators = new HashMap<>();
+    }
+
+    @PostConstruct
+    public void init() {
+        this.mainScene.setOnKeyPressed(new SketchKeyboardController(this));
     }
 
     @Override
@@ -89,5 +103,10 @@ public class DefaultSketchBoardManager implements SketchBoardManager {
     @Override
     public SketchComponentUI createUIFor(SketchComponent<?> component) {
         return this.uiFactory.createUIFor(component);
+    }
+
+    @Override
+    public SketchBoardControllerMediator getCurrentMediator() {
+        return this.mediators.get(this.currentSketchBoard);
     }
 }

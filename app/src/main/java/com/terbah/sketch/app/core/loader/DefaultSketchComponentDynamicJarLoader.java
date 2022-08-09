@@ -61,7 +61,6 @@ public class DefaultSketchComponentDynamicJarLoader implements SketchComponentDy
     @PostConstruct
     public void init() {
         this.logger = SketchLoggerManager.getLogger(this.getClass());
-        this.loadComponents();
     }
 
     @Override

@@ -12,4 +12,9 @@ public class SketchComponentWithIntParam implements SketchComponent<Integer> {
     public Integer execute() {
         return 10;
     }
+
+    @Override
+    public SketchComponent<Integer> copy() {
+        return new SketchComponentWithIntParam();
+    }
 }

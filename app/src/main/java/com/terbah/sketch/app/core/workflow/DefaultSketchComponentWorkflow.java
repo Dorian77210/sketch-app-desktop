@@ -147,6 +147,27 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
         return true;
     }
 
+    @Override
+    public void deleteComponent(SketchComponent<?> component) {
+        this.orphanComponents.remove(component);
+        this.edges.remove(component);
+        // remove links where the component is a parent
+        for (var entry : this.edges.entrySet()) {
+            List<String> entriesToDelete = new ArrayList<>();
+            Map<String, SketchComponent<?>> parents = entry.getValue();
+            for (var parentEntry : parents.entrySet()) {
+                SketchComponent<?> parent = parentEntry.getValue();
+                if (parent.equals(component)) {
+                    entriesToDelete.add(parentEntry.getKey());
+                }
+            }
+
+            for (String entryToDelete : entriesToDelete) {
+                parents.remove(entryToDelete);
+            }
+        }
+    }
+
     /**
      * Check if a connection between two component can be made.
      *

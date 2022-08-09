@@ -54,6 +54,13 @@ public interface SketchComponentWorkflow {
     void removeLink(SketchComponent<?> child, String entryName);
 
     /**
+     * Delete a component in the workflow.
+     *
+     * @param component The component to delete.
+     */
+    void deleteComponent(SketchComponent<?> component);
+
+    /**
      * Clear the workflow.
      */
     void clear();

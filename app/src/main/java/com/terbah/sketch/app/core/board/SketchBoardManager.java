@@ -3,6 +3,7 @@ package com.terbah.sketch.app.core.board;
 import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.app.ui.board.SketchBoard;
 import com.terbah.sketch.app.ui.board.SketchComponentUI;
+import com.terbah.sketch.app.ui.controller.SketchBoardControllerMediator;
 
 /**
  * @author Dorian Terbah
@@ -38,4 +39,9 @@ public interface SketchBoardManager {
      * @return The created UI.
      */
     SketchComponentUI createUIFor(SketchComponent<?> component);
+
+    /**
+     * @return The current mediator.
+     */
+    SketchBoardControllerMediator getCurrentMediator();
 }

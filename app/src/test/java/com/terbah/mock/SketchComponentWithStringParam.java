@@ -25,4 +25,9 @@ public class SketchComponentWithStringParam implements SketchComponent<String> {
     public String execute() {
         return this.data + " " + this.data;
     }
+
+    @Override
+    public SketchComponent<String> copy() {
+        return new SketchComponentWithStringParam();
+    }
 }

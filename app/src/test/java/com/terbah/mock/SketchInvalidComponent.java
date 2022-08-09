@@ -8,4 +8,9 @@ public class SketchInvalidComponent implements SketchComponent<String> {
     public String execute() {
         return "";
     }
+
+    @Override
+    public SketchComponent<String> copy() {
+        return null;
+    }
 }

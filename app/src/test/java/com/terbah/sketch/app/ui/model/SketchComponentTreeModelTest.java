@@ -1,19 +1,18 @@
 package com.terbah.sketch.app.ui.model;
 
+import com.terbah.SpringTestConfiguration;
 import com.terbah.mock.SketchComponentWithIntParam;
 import com.terbah.mock.SketchComponentWithStringParam;
 import com.terbah.mock.SketchComponentWithTwoString;
-import com.terbah.sketch.app.SpringConfiguration;
 import com.terbah.sketch.app.core.config.SketchComponentConfigurationManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest(classes = SpringConfiguration.class)
+@SpringBootTest(classes = SpringTestConfiguration.class)
 class SketchComponentTreeModelTest {
 
     @Autowired

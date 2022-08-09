@@ -36,4 +36,9 @@ public class SketchComponentWithTwoString implements SketchComponent<String> {
 
         return this.a + this.b;
     }
+
+    @Override
+    public SketchComponent<String> copy() {
+        return new SketchComponentWithTwoString();
+    }
 }

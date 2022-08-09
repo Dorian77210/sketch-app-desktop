@@ -1,18 +1,23 @@
 package com.terbah.sketch.app.core.config;
 
+import com.terbah.SpringTestConfiguration;
 import com.terbah.mock.SketchComponentWithStringParam;
 import com.terbah.mock.SketchComponentWithTwoString;
 import com.terbah.mock.SketchInvalidComponent;
-import com.terbah.sketch.app.SpringConfiguration;
 import com.terbah.sketch.app.core.injector.SketchDataInjector;
+import javafx.application.Platform;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = SpringConfiguration.class)
+@SpringBootTest(classes = SpringTestConfiguration.class)
 class SketchComponentConfigurationManagerTest {
 
     @Autowired

@@ -55,6 +55,11 @@ public class SketchComponentUI extends BorderPane {
      */
     private static final double ENTRY_HEIGHT = SKETCH_COMPONENT_UI_HEIGHT / 4;
 
+    /**
+     * Boolean to know if the component is selected.
+     */
+    private boolean isSelected;
+
 
     /**
      * Associated configuration.
@@ -69,6 +74,7 @@ public class SketchComponentUI extends BorderPane {
     public SketchComponentUI(SketchComponentConfiguration configuration) {
         super();
         this.configuration = configuration;
+        this.isSelected = false;
     }
 
     /**
@@ -78,7 +84,6 @@ public class SketchComponentUI extends BorderPane {
      */
     public void setup(SketchBoardControllerMediator mediator) {
         this.setPrefSize(SKETCH_COMPONENT_UI_WIDTH, SKETCH_COMPONENT_UI_HEIGHT);
-
         // build the description UI. //
         VBox descriptionUI = new VBox(10);
         descriptionUI.setAlignment(Pos.CENTER);
@@ -93,6 +98,8 @@ public class SketchComponentUI extends BorderPane {
                 CornerRadii.EMPTY, new BorderWidths(2.0), Insets.EMPTY)));
 
         this.setCenter(descriptionUI);
+        descriptionUI.setOnMouseClicked(event -> mediator.selectComponent(this));
+
 
         // entry pane //
         Map<String, Class<?>> entries = this.configuration.getEntries();
@@ -129,5 +136,20 @@ public class SketchComponentUI extends BorderPane {
         }
 
         this.setStyle("-fx-background-color: yellow;");
+    }
+
+    /**
+     * Update borders according to the selected property.
+     */
+    private void updateBorders() {
+        Color selectedColor = this.isSelected ? Color.RED : Color.BLACK;
+        this.setBorder(new Border(new BorderStroke(selectedColor, selectedColor, selectedColor, selectedColor,
+                BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID, BorderStrokeStyle.SOLID,
+                CornerRadii.EMPTY, new BorderWidths(2.0), Insets.EMPTY)));
+    }
+
+    public void setSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+        this.updateBorders();
     }
 }

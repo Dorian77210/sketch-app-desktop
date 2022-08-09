@@ -4,6 +4,7 @@ import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.app.core.board.SketchBoardManager;
 import com.terbah.sketch.app.core.config.SketchComponentConfiguration;
 import com.terbah.sketch.app.core.config.SketchComponentConfigurationManager;
+import com.terbah.sketch.app.core.loader.SketchComponentDynamicJarLoader;
 import com.terbah.sketch.app.ui.model.SketchComponentTreeModel;
 import static com.terbah.sketch.app.ui.model.SketchComponentTreeModel.SketchComponentTreeItemModel;
 
@@ -43,6 +44,9 @@ public class SketchComponentTreeView extends BorderPane {
     @Autowired
     private SketchBoardManager boardManager;
 
+    @Autowired
+    private SketchComponentDynamicJarLoader jarLoader;
+
     /**
      * Constant used for the filter method.
      */
@@ -77,6 +81,7 @@ public class SketchComponentTreeView extends BorderPane {
 
     @PostConstruct
     public void init() {
+        this.jarLoader.loadComponents();
         this.filterBy(NO_FILTER);
     }
 
