@@ -2,6 +2,7 @@ package com.terbah.sketch.app.ui.controller;
 
 import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.app.core.board.SketchBoardManager;
+import com.terbah.sketch.app.core.logger.SketchLoggerManager;
 import com.terbah.sketch.app.core.workflow.SketchComponentWorkflow;
 import com.terbah.sketch.app.ui.board.SketchBoard;
 import com.terbah.sketch.app.ui.board.SketchComponentUI;
@@ -9,6 +10,8 @@ import com.terbah.sketch.app.ui.board.entry.SketchComponentSlot;
 import javafx.scene.input.MouseEvent;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Dorian TERBAH
@@ -61,6 +64,11 @@ public class SketchBoardControllerMediator {
     private final SketchComponentDragController dragController;
 
     /**
+     * Logger.
+     */
+    private Logger logger;
+
+    /**
      * Constructor
      * @param board The associated sketch board
      * @param manager The associated
@@ -74,6 +82,7 @@ public class SketchBoardControllerMediator {
         this.selectedComponents = new ArrayList<>();
         this.selectedUIs = new ArrayList<>();
         this.dragController = new SketchComponentDragController(this);
+        this.logger = SketchLoggerManager.getLogger(this.getClass());
 
         // set the listeners
         this.board.setOnMouseClicked(this::receiveClickEvent);
@@ -106,7 +115,7 @@ public class SketchBoardControllerMediator {
     private void insertComponent(SketchComponent<?> component, double x, double y) {
         this.worflow.insertComponent(component);
         SketchComponentUI ui = this.boardManager.createUIFor(component);
-        ui.setup(this);
+        ui.setup(this, component);
         ui.setLayoutX(x);
         ui.setLayoutY(y);
         // drag and drop events.
@@ -170,11 +179,31 @@ public class SketchBoardControllerMediator {
      * @param slot The selected to add.
      */
     public void addSelectedSlot(SketchComponentSlot slot) {
+        if (this.selectedSlots.contains(slot)) {
+            slot.unselect();
+            this.selectedSlots.clear();
+            return;
+        }
+
         // add an order for the entries.
-        System.out.println(slot.getEntryName());
         this.selectedSlots.push(slot);
+        slot.select();
         if (this.selectedSlots.size() == 2) {
-            // try to create link between the two components
+            SketchComponentSlot childSlot = this.selectedSlots.pop();
+            SketchComponentSlot parentSlot = this.selectedSlots.pop();
+
+            String entryName = childSlot.getEntryName();
+            SketchComponent<?> child = childSlot.getAssociatedComponent();
+            SketchComponent<?> parent = parentSlot.getAssociatedComponent();
+
+            if (!this.worflow.createLinkBetween(parent, child, entryName)) {
+                this.logger.log(Level.SEVERE, "Error during the creation of link");
+            } else {
+                this.logger.log(Level.FINE, "Link created !");
+            }
+
+            childSlot.unselect();
+            parentSlot.unselect();
         }
     }
 

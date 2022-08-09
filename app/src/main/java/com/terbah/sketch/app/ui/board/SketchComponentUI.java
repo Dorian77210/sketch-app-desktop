@@ -1,5 +1,6 @@
 package com.terbah.sketch.app.ui.board;
 
+import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.app.core.config.SketchComponentConfiguration;
 import com.terbah.sketch.app.ui.board.entry.SketchComponentSlot;
 import com.terbah.sketch.app.ui.board.entry.SketchComponentSlotType;
@@ -81,8 +82,9 @@ public class SketchComponentUI extends BorderPane {
      * Set up the UI.
      *
      * @param mediator The mediator associated to this ui.
+     * @param associatedComponent The associated component.
      */
-    public void setup(SketchBoardControllerMediator mediator) {
+    public void setup(SketchBoardControllerMediator mediator, SketchComponent<?> associatedComponent) {
         this.setPrefSize(SKETCH_COMPONENT_UI_WIDTH, SKETCH_COMPONENT_UI_HEIGHT);
         // build the description UI. //
         VBox descriptionUI = new VBox(10);
@@ -112,7 +114,7 @@ public class SketchComponentUI extends BorderPane {
             String entryName = entry.getKey();
             Tooltip tooltip = new Tooltip(entryName);
             tooltip.setShowDelay(Duration.millis(500.0));
-            SketchComponentSlot entrySlot = new SketchComponentSlot(SketchComponentSlotType.ENTRY, entryName);
+            SketchComponentSlot entrySlot = new SketchComponentSlot(SketchComponentSlotType.ENTRY, associatedComponent, entryName);
             entrySlot.setTooltip(tooltip);
             entrySlot.setOnMouseClicked(event -> mediator.addSelectedSlot(entrySlot));
             entrySlot.setMinHeight(space);
@@ -127,7 +129,7 @@ public class SketchComponentUI extends BorderPane {
         if (returnType != null) {
             VBox outputPane = new VBox();
             outputPane.setAlignment(Pos.CENTER);
-            SketchComponentSlot outputSlot = new SketchComponentSlot(SketchComponentSlotType.OUTPUT);
+            SketchComponentSlot outputSlot = new SketchComponentSlot(SketchComponentSlotType.OUTPUT, associatedComponent);
             outputSlot.setOnMouseClicked(event -> mediator.addSelectedSlot(outputSlot));
             outputSlot.setMinWidth(ENTRY_WIDTH);
             outputSlot.setMinHeight(ENTRY_HEIGHT);
