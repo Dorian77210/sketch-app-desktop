@@ -66,7 +66,7 @@ public class DefaultSketchComponentDynamicJarLoader implements SketchComponentDy
     @Override
     public void loadComponents() {
         // todo: change raw dir
-        String libDir = "D:\\libs";
+        String libDir = "/Users/dorian/projects/lib";
         List<URL> urls = this.getJarURLS(libDir);
 
         URLClassLoader childClassLoader = new URLClassLoader(urls.toArray(new URL[0]), ClassLoader.getSystemClassLoader());

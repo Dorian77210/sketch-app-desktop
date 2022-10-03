@@ -198,9 +198,11 @@ public class SketchBoardControllerMediator {
             String entryName = childSlot.getEntryName();
             SketchComponent<?> child = childSlot.getAssociatedComponent();
             SketchComponent<?> parent = parentSlot.getAssociatedComponent();
+            boolean failedLinkCreation = false;
 
             if (!this.worflow.createLinkBetween(parent, child, entryName)) {
                 this.logger.log(Level.SEVERE, "Error during the creation of link");
+                failedLinkCreation = true;
             } else {
                 this.logger.log(Level.FINE, "Link created !");
             }
@@ -208,7 +210,9 @@ public class SketchBoardControllerMediator {
             childSlot.unselect();
             parentSlot.unselect();
 
-            this.createLinkBetween(parentSlot, childSlot);
+            if (!failedLinkCreation) {
+                this.createLinkBetween(parentSlot, childSlot);
+            }
         }
     }
 
