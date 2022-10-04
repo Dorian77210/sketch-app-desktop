@@ -1,8 +1,7 @@
 package com.terbah.sketch.app.core.config;
 
 import com.terbah.sketch.api.SketchComponent;
-import com.terbah.sketch.api.annotation.ComponentName;
-import com.terbah.sketch.api.annotation.ComponentNamespace;
+import com.terbah.sketch.api.annotation.ComponentConfiguration;
 import com.terbah.sketch.api.annotation.MethodInjectable;
 import com.terbah.sketch.app.core.config.validator.SketchComponentMissingRequiredAnnotation;
 import com.terbah.sketch.app.core.config.validator.SketchComponentValidator;
@@ -48,8 +47,9 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
 
         this.logger.log(Level.FINE, "Register component {0} ", componentClass);
 
-        String componentName = componentClass.getAnnotation(ComponentName.class).value();
-        String namespace = componentClass.getAnnotation(ComponentNamespace.class).value();
+        ComponentConfiguration componentConfigurationAnnotation = componentClass.getAnnotation(ComponentConfiguration.class);
+        String componentName = componentConfigurationAnnotation.name();
+        String namespace = componentConfigurationAnnotation.namespace();
         List<SketchComponentEntry> entries = new ArrayList<>();
         SketchComponentConfiguration configuration = new SketchComponentConfiguration(componentName, namespace);
 

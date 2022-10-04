@@ -2,11 +2,13 @@ package com.terbah.sketch.natif.component.common;
 
 
 import com.terbah.sketch.api.SketchComponent;
-import com.terbah.sketch.api.annotation.ComponentName;
-import com.terbah.sketch.api.annotation.ComponentNamespace;
+import com.terbah.sketch.api.annotation.ComponentConfiguration;
 
-@ComponentName("Number input")
-@ComponentNamespace("Common")
+
+@ComponentConfiguration(
+        name = "Number input",
+        namespace = "Common"
+)
 public class SketchNumberComponent implements SketchComponent<Number> {
 
     private Number value;

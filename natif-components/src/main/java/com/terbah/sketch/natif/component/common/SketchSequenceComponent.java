@@ -1,8 +1,7 @@
 package com.terbah.sketch.natif.component.common;
 
 import com.terbah.sketch.api.SketchComponent;
-import com.terbah.sketch.api.annotation.ComponentName;
-import com.terbah.sketch.api.annotation.ComponentNamespace;
+import com.terbah.sketch.api.annotation.ComponentConfiguration;
 import com.terbah.sketch.api.annotation.MethodInjectable;
 import com.terbah.sketch.api.exception.SketchComponentExecuteException;
 import com.terbah.sketch.natif.type.NumberList;
@@ -16,8 +15,10 @@ import com.terbah.sketch.natif.type.NumberList;
  * @version 1.0
  */
 
-@ComponentName("Number Sequence")
-@ComponentNamespace("Common")
+@ComponentConfiguration(
+        name = "Number Sequence",
+        namespace = "Common"
+)
 public class SketchSequenceComponent implements SketchComponent<NumberList> {
 
     /**
