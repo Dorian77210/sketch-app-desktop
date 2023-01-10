@@ -33,6 +33,11 @@ public class SketchKeyboardController implements EventHandler<KeyEvent> {
     private static final KeyCode KEY_FOR_DELETE = KeyCode.DELETE;
 
     /**
+     * Key for deleting components (MACOS)
+     */
+    private static final KeyCode KEY_FOR_DELETE_MACOS = KeyCode.BACK_SPACE;
+
+    /**
      * Board manager of the app.
      */
     private final SketchBoardManager manager;
@@ -45,16 +50,18 @@ public class SketchKeyboardController implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
         KeyCode code = keyEvent.getCode();
 
-        if (keyEvent.isControlDown()) {
+        if (keyEvent.isControlDown() || keyEvent.isMetaDown()) {
             if (code.equals(KEY_FOR_COPY)) {
                 CommandManager.executeCommand(new CopyCommand(this.manager.getCurrentMediator()));
             } else if (code.equals(KEY_FOR_PASTE)) {
                 CommandManager.executeCommand(new PasteCommand(this.manager.getCurrentMediator()));
             }
         } else {
-            if (code.equals(KEY_FOR_DELETE)) {
+            if (code.equals(KEY_FOR_DELETE) || code.equals(KEY_FOR_DELETE_MACOS)) {
                 this.manager.getCurrentMediator().deleteSelectedComponents();
             }
         }
+
+        keyEvent.consume();
     }
 }
