@@ -65,9 +65,19 @@ public class SketchBoardControllerMediator {
     private final SketchComponentDragController dragController;
 
     /**
+     * SKetch arrow controller
+     */
+    private final SketchArrowController arrowController;
+
+    /**
      * Logger.
      */
     private Logger logger;
+
+    /**
+     * Current selected arrow;
+     */
+    private SketchArrow currentSelectedArrow;
 
     /**
      * Constructor
@@ -84,10 +94,13 @@ public class SketchBoardControllerMediator {
         this.selectedUIs = new ArrayList<>();
         this.dragController = new SketchComponentDragController(this);
         this.logger = SketchLoggerManager.getLogger(this.getClass());
+        this.arrowController = new SketchArrowController(this);
 
         // set the listeners
         this.board.setOnMouseClicked(this::receiveClickEvent);
         this.board.setFocusTraversable(true);
+
+        this.currentSelectedArrow = null;
     }
 
     /**
@@ -156,6 +169,10 @@ public class SketchBoardControllerMediator {
      * @param ui The ui associated to the component.
      */
     public void selectComponent(SketchComponentUI ui) {
+        if (this.currentSelectedArrow != null) {
+            this.currentSelectedArrow.setIsSelected(false);
+            this.currentSelectedArrow = null;
+        }
         this.unselectedComponents();
         ui.setSelected(true);
         this.selectedUIs.add(ui);
@@ -225,6 +242,8 @@ public class SketchBoardControllerMediator {
     private void createLinkBetween(SketchComponentSlot source, SketchComponentSlot destination) {
         SketchArrow arrow = SketchArrow.fromSourceAndDestination(source, destination);
         this.board.getChildren().add(arrow);
+        arrow.setOnMouseClicked(this.arrowController);
+        arrow.setOnMouseEntered(this.arrowController);
     }
 
     public List<SketchComponent<?>> getSelectedComponents() {
@@ -240,5 +259,14 @@ public class SketchBoardControllerMediator {
             this.worflow.deleteComponent(component);
             this.board.getChildren().remove(currentUI);
         }
+    }
+
+    public void selectArrow(SketchArrow arrow) {
+        if (this.currentSelectedArrow != null) {
+            this.currentSelectedArrow.setIsSelected(false);
+        }
+
+        this.currentSelectedArrow = arrow;
+        this.currentSelectedArrow.setIsSelected(true);
     }
 }

@@ -1,5 +1,6 @@
 package com.terbah.sketch.app.ui.board;
 
+import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.app.ui.board.entry.SketchComponentSlot;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
@@ -27,13 +28,26 @@ public class SketchArrow extends Path
     private static final double DEFAULT_ARROW_HEAD_SIZE = 10.0;
 
     /**
+     * Source slot of the arrow
+     */
+    private SketchComponentSlot source;
+
+    /**
+     * Destination slot of the arrow
+     */
+    private SketchComponentSlot destination;
+
+    /**
      * Create a new sketch arrow.
      */
-    private SketchArrow(Line line)
+    private SketchArrow(Line line, SketchComponentSlot source, SketchComponentSlot destination)
     {
         super();
+        this.source = source;
+        this.destination = destination;
+
         strokeProperty().bind(fillProperty());
-        this.setStrokeWidth(2.0);
+        this.setStrokeWidth(4.0);
 
         this.setFill(Color.BLACK);
 
@@ -126,6 +140,20 @@ public class SketchArrow extends Path
         link.startYProperty().bind(source.yProperty());
         link.endXProperty().bind(destination.xProperty());
         link.endYProperty().bind(destination.yProperty());
-        return new SketchArrow(link);
+        return new SketchArrow(link, source, destination);
+    }
+
+    /**
+     * @return The source component associated to this arrow
+     */
+    public SketchComponent<?> getSourceComponent() {
+        return this.source.getAssociatedComponent();
+    }
+
+    /**
+     * @return The destination component associated to this arrow
+     */
+    public SketchComponent<?> getDestinationComponent() {
+        return this.destination.getAssociatedComponent();
     }
 }
