@@ -2,6 +2,7 @@ package com.terbah.mock;
 
 import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.api.annotation.ComponentConfiguration;
+import com.terbah.sketch.api.ui.SketchConfigurationPopup;
 
 
 @ComponentConfiguration(
@@ -18,5 +19,10 @@ public class SketchComponentWithIntParam implements SketchComponent<Integer> {
     @Override
     public SketchComponent<Integer> copy() {
         return new SketchComponentWithIntParam();
+    }
+
+    @Override
+    public SketchConfigurationPopup openConfigurationPopup() {
+        return null;
     }
 }

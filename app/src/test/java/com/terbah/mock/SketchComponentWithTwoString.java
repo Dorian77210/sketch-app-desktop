@@ -4,6 +4,7 @@ import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.api.annotation.ComponentConfiguration;
 import com.terbah.sketch.api.annotation.MethodInjectable;
 import com.terbah.sketch.api.exception.SketchComponentExecuteException;
+import com.terbah.sketch.api.ui.SketchConfigurationPopup;
 
 @ComponentConfiguration(
         namespace = "test",
@@ -41,5 +42,10 @@ public class SketchComponentWithTwoString implements SketchComponent<String> {
     @Override
     public SketchComponent<String> copy() {
         return new SketchComponentWithTwoString();
+    }
+
+    @Override
+    public SketchConfigurationPopup openConfigurationPopup() {
+        return null;
     }
 }
