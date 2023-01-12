@@ -1,14 +1,13 @@
-package com.terbah.sketch.natif.ui.common;
+package com.terbah.sketch.natif.component.ui.common;
 
 import com.terbah.sketch.api.data.util.SketchDataWrapper;
 import com.terbah.sketch.api.ui.SketchConfigurationPopup;
 import com.terbah.sketch.api.ui.SketchAlertBuilder;
-import com.terbah.sketch.natif.component.common.SketchNumberComponent;
+import com.terbah.sketch.natif.component.SketchNumberComponent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Window;
 import javafx.util.converter.DoubleStringConverter;
 
 /**

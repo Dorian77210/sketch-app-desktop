@@ -19,6 +19,11 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
     private final Map<SketchComponent<?>, Map<String, SketchComponent<?>>> edges;
 
     /**
+     * Map a component with his children
+     */
+    private final Map<SketchComponent<?>, Map<String, SketchComponent<?>>> children;
+
+    /**
      * Components that doesn't have any links with other components.
      */
     private final List<SketchComponent<?>> orphanComponents;
@@ -40,6 +45,7 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
 
     public DefaultSketchComponentWorkflow(SketchComponentConfigurationManager configurationManager, SketchDataInjector injector) {
         this.edges = new HashMap<>();
+        this.children = new HashMap<>();
         this.logger = SketchLoggerManager.getLogger(this.getClass());
 
         this.orphanComponents = new LinkedList<>();
@@ -90,9 +96,12 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
         Map<SketchComponent<?>, Object> data = new HashMap<>();
         Deque<SketchComponent<?>> componentStack = this.buildComponentQueue(component);
 
+        SketchComponent<?> currentComponent = null;
+        Object result = null;
+
         // execute each components
         while (!componentStack.isEmpty()) {
-            SketchComponent<?> currentComponent = componentStack.pop();
+            currentComponent = componentStack.pop();
 
             if (this.hasParents(currentComponent)) {
                 Map<String, SketchComponent<?>> parents = this.edges.get(currentComponent);
@@ -107,13 +116,18 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
             }
 
             try {
-                Object result = currentComponent.execute();
+                result = currentComponent.execute();
                 this.logger.log(Level.FINE, "Result = {0}", result);
                 data.put(currentComponent, result);
             } catch (SketchComponentExecuteException e) {
                 this.logger.log(Level.SEVERE, String.format("Error during the execution of the component %s", currentComponent), e);
                 return false;
             }
+        }
+
+        // inject the result of the source component in his children
+        for (var entry : this.children.get(currentComponent).entrySet()) {
+            this.dataInjector.injectData(entry.getValue(), entry.getKey(), result);
         }
 
         return true;
@@ -137,12 +151,22 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
         }
 
         Map<String, SketchComponent<?>> parents;
+        Map<String, SketchComponent<?>> children;
+
         if (!this.edges.containsKey(child)) {
             this.edges.put(child, new HashMap<>());
         }
 
         parents = this.edges.get(child);
         parents.put(entryName, parent);
+
+        // create the entry in the children map
+        if (!this.children.containsKey(parent)) {
+            this.children.put(parent, new HashMap<>());
+        }
+
+        children = this.children.get(parent);
+        children.put(entryName, child);
 
         return true;
     }
@@ -151,6 +175,9 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
     public void deleteComponent(SketchComponent<?> component) {
         this.orphanComponents.remove(component);
         this.edges.remove(component);
+
+        // remove in the children ?
+
         // remove links where the component is a parent
 
         this.edges.entrySet().forEach(entry -> {

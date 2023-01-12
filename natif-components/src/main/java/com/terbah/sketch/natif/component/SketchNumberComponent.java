@@ -1,4 +1,4 @@
-package com.terbah.sketch.natif.component.common;
+package com.terbah.sketch.natif.component;
 
 
 import com.terbah.sketch.api.SketchComponent;
@@ -7,7 +7,7 @@ import com.terbah.sketch.api.data.util.SketchDataWrapper;
 import com.terbah.sketch.api.data.util.SketchDataWrapperFactory;
 import com.terbah.sketch.api.exception.SketchComponentExecuteException;
 import com.terbah.sketch.api.ui.SketchConfigurationPopup;
-import com.terbah.sketch.natif.ui.common.SketchNumberComponentPopup;
+import com.terbah.sketch.natif.component.ui.common.SketchNumberComponentPopup;
 
 
 @ComponentConfiguration(
