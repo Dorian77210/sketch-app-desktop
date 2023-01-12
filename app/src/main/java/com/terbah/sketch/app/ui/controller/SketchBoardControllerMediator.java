@@ -36,7 +36,7 @@ public class SketchBoardControllerMediator {
     /**
      * Associated workflow of the board.
      */
-    private final SketchComponentWorkflow worflow;
+    private final SketchComponentWorkflow workflow;
 
     /**
      * Selected slots by the user. It will store
@@ -87,7 +87,7 @@ public class SketchBoardControllerMediator {
     public SketchBoardControllerMediator(SketchBoard board, SketchComponentWorkflow workflow, SketchBoardManager manager) {
         this.board = board;
         this.boardManager = manager;
-        this.worflow = workflow;
+        this.workflow = workflow;
         this.selectedSlots = new ArrayDeque<>();
         this.uiToComponent = new HashMap<>();
         this.selectedComponents = new ArrayList<>();
@@ -127,7 +127,7 @@ public class SketchBoardControllerMediator {
     }
 
     private void insertComponent(SketchComponent<?> component, double x, double y) {
-        this.worflow.insertComponent(component);
+        this.workflow.insertComponent(component);
         SketchComponentUI ui = this.boardManager.createUIFor(component);
         ui.setup(this, component);
         ui.setLayoutX(x);
@@ -217,7 +217,7 @@ public class SketchBoardControllerMediator {
             SketchComponent<?> parent = parentSlot.getAssociatedComponent();
             boolean failedLinkCreation = false;
 
-            if (!this.worflow.createLinkBetween(parent, child, entryName)) {
+            if (!this.workflow.createLinkBetween(parent, child, entryName)) {
                 this.logger.log(Level.SEVERE, "Error during the creation of link");
                 failedLinkCreation = true;
             } else {
@@ -267,7 +267,7 @@ public class SketchBoardControllerMediator {
     private void deleteSelectedComponents() {
         for (SketchComponentUI currentUI : this.selectedUIs) {
             SketchComponent<?> component = this.uiToComponent.get(currentUI);
-            this.worflow.deleteComponent(component);
+            this.workflow.deleteComponent(component);
             this.board.getChildren().remove(currentUI);
         }
     }
@@ -279,7 +279,7 @@ public class SketchBoardControllerMediator {
         // delete the link in the workflow
         SketchComponent<?> destination = this.currentSelectedArrow.getDestinationComponent();
         String entryName = this.currentSelectedArrow.getEntryName();
-        this.worflow.removeLink(destination, entryName);
+        this.workflow.removeLink(destination, entryName);
         this.logger.log(Level.FINE, String.format("Delete link with destination={} and entry name={}", destination, entryName));
         this.board.getChildren().remove(this.currentSelectedArrow);
         this.currentSelectedArrow = null;
@@ -292,5 +292,14 @@ public class SketchBoardControllerMediator {
 
         this.currentSelectedArrow = arrow;
         this.currentSelectedArrow.setIsSelected(true);
+    }
+
+
+    /**
+     * Execute a component.
+     * @param component The component to execute
+     */
+    public void executeComponent(final SketchComponent<?> component) {
+        this.workflow.execute(component);
     }
 }

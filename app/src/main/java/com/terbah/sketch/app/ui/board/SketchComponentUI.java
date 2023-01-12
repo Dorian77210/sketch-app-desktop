@@ -99,6 +99,10 @@ public class SketchComponentUI extends BorderPane {
                 BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID, BorderStrokeStyle.NONE, BorderStrokeStyle.SOLID,
                 CornerRadii.EMPTY, new BorderWidths(2.0), Insets.EMPTY)));
 
+        playButton.setOnAction(event -> {
+            mediator.executeComponent(associatedComponent);
+        });
+
         this.setCenter(descriptionUI);
         descriptionUI.setOnMouseClicked(event -> mediator.selectComponent(this));
 
