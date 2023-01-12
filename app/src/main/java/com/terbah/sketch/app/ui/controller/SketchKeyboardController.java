@@ -58,7 +58,7 @@ public class SketchKeyboardController implements EventHandler<KeyEvent> {
             }
         } else {
             if (code.equals(KEY_FOR_DELETE) || code.equals(KEY_FOR_DELETE_MACOS)) {
-                this.manager.getCurrentMediator().deleteSelectedComponents();
+                this.manager.getCurrentMediator().deleteSelectedUI();
             }
         }
 

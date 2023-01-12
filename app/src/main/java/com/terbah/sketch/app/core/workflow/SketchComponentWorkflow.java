@@ -49,7 +49,7 @@ public interface SketchComponentWorkflow {
      * Remove a link between two components associated by the entry name.
      *
      * @param child     The target component.
-     * @param entryName The name of the entry for of the target component.
+     * @param entryName The name of the entry for the target component.
      */
     void removeLink(SketchComponent<?> child, String entryName);
 

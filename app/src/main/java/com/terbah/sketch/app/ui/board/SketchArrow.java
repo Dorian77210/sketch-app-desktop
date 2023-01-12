@@ -151,6 +151,12 @@ public class SketchArrow extends Path
     }
 
     /**
+     * @return The entry name associated to the destination of the link
+     */
+    public String getEntryName() {
+        return this.destination.getEntryName();
+    }
+    /**
      * @return The destination component associated to this arrow
      */
     public SketchComponent<?> getDestinationComponent() {

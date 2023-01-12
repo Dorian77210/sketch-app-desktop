@@ -251,14 +251,38 @@ public class SketchBoardControllerMediator {
     }
 
     /**
-     * Delete the selected components from the board.
+     * Delete the selected UI on the sketch board
      */
-    public void deleteSelectedComponents() {
+    public void deleteSelectedUI() {
+        if (this.currentSelectedArrow != null) {
+            this.deleteSelectedArrow();
+        } else {
+            this.deleteSelectedComponents();
+        }
+    }
+
+    /**
+     * Delete the selected components in the app
+     */
+    private void deleteSelectedComponents() {
         for (SketchComponentUI currentUI : this.selectedUIs) {
             SketchComponent<?> component = this.uiToComponent.get(currentUI);
             this.worflow.deleteComponent(component);
             this.board.getChildren().remove(currentUI);
         }
+    }
+
+    /**
+     * Delete the selected arrow in the app.
+     */
+    private void deleteSelectedArrow() {
+        // delete the link in the workflow
+        SketchComponent<?> destination = this.currentSelectedArrow.getDestinationComponent();
+        String entryName = this.currentSelectedArrow.getEntryName();
+        this.worflow.removeLink(destination, entryName);
+        this.logger.log(Level.FINE, String.format("Delete link with destination={} and entry name={}", destination, entryName));
+        this.board.getChildren().remove(this.currentSelectedArrow);
+        this.currentSelectedArrow = null;
     }
 
     public void selectArrow(SketchArrow arrow) {
