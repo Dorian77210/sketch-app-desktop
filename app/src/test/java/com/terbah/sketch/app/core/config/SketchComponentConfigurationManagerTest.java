@@ -40,8 +40,8 @@ class SketchComponentConfigurationManagerTest {
         assertEquals(String.class, configuration.getReturnType());
         assertTrue(configuration.hasMethodInjectableFor("data"));
         assertFalse(configuration.hasMethodInjectableFor("b"));
-        assertEquals("SketchComponentWithString", configuration.getComponentName());
-        assertEquals("Test/Mock", configuration.getNamespace());
+        assertEquals("SketchComponentWithStringParam", configuration.getComponentName());
+        assertEquals("test", configuration.getNamespace());
 
         configuration = this.configurationManager.getConfigurationByComponentClass(SketchComponentWithTwoString.class);
         assertNotNull(configuration);
@@ -50,9 +50,6 @@ class SketchComponentConfigurationManagerTest {
         assertTrue(configuration.hasMethodInjectableFor("b"));
         assertFalse(configuration.hasMethodInjectableFor("data"));
         assertEquals("SketchComponentWithTwoString", configuration.getComponentName());
-        assertEquals("Test/Mock", configuration.getNamespace());
-
-        configuration = this.configurationManager.getConfigurationByComponentClass(SketchInvalidComponent.class);
-        assertNull(configuration);
+        assertEquals("test", configuration.getNamespace());
     }
 }

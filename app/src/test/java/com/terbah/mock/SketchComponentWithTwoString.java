@@ -1,9 +1,14 @@
 package com.terbah.mock;
 
 import com.terbah.sketch.api.SketchComponent;
+import com.terbah.sketch.api.annotation.ComponentConfiguration;
 import com.terbah.sketch.api.annotation.MethodInjectable;
 import com.terbah.sketch.api.exception.SketchComponentExecuteException;
 
+@ComponentConfiguration(
+        namespace = "test",
+        name = "SketchComponentWithTwoString"
+)
 public class SketchComponentWithTwoString implements SketchComponent<String> {
 
     private String b;

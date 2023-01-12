@@ -26,12 +26,12 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
     /**
      * Logger used in the workflow.
      */
-    private Logger logger;
+    private final Logger logger;
 
     /**
      * Data injector to inject data to the components.
      */
-    private SketchDataInjector dataInjector;
+    private final SketchDataInjector dataInjector;
 
     /**
      * The configuration manager of the application.
@@ -42,7 +42,7 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
         this.edges = new HashMap<>();
         this.logger = SketchLoggerManager.getLogger(this.getClass());
 
-        this.orphanComponents = new ArrayList<>();
+        this.orphanComponents = new LinkedList<>();
 
         this.configurationManager = configurationManager;
         this.dataInjector = injector;
@@ -59,18 +59,18 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
      * @return The deque with all the parents
      */
     private Deque<SketchComponent<?>> buildComponentQueue(SketchComponent<?> component) {
-        Deque<SketchComponent<?>> componentStack = new ArrayDeque<>();
-        List<SketchComponent<?>> currentComponents = new ArrayList<>();
+        Deque<SketchComponent<?>> componentStack = new LinkedList<>();
+        List<SketchComponent<?>> currentComponents = new LinkedList<>();
         currentComponents.add(component);
         componentStack.push(component);
 
         // push all the parents of the component, then the parents of the parents, etc
         while (!currentComponents.isEmpty()) {
-            List<SketchComponent<?>> tmpComponents = new ArrayList<>();
+            List<SketchComponent<?>> tmpComponents = new LinkedList<>();
 
             for (SketchComponent<?> currentComponent : currentComponents) {
                 if (this.hasParents(currentComponent)) {
-                    List<SketchComponent<?>> parents = new ArrayList<>(this.edges.get(currentComponent).values());
+                    List<SketchComponent<?>> parents = new LinkedList<>(this.edges.get(currentComponent).values());
                     for (SketchComponent<?> parent : parents) {
                         componentStack.push(parent);
                         tmpComponents.add(parent);
@@ -152,8 +152,9 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
         this.orphanComponents.remove(component);
         this.edges.remove(component);
         // remove links where the component is a parent
-        for (var entry : this.edges.entrySet()) {
-            List<String> entriesToDelete = new ArrayList<>();
+
+        this.edges.entrySet().forEach(entry -> {
+            List<String> entriesToDelete = new LinkedList<>();
             Map<String, SketchComponent<?>> parents = entry.getValue();
             for (var parentEntry : parents.entrySet()) {
                 SketchComponent<?> parent = parentEntry.getValue();
@@ -165,7 +166,7 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
             for (String entryToDelete : entriesToDelete) {
                 parents.remove(entryToDelete);
             }
-        }
+        });
     }
 
     /**
@@ -209,7 +210,7 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
         if (links == null) {
             return false;
         }
-        List<SketchComponent<?>> components = new ArrayList<>(links.values());
+        List<SketchComponent<?>> components = new LinkedList<>(links.values());
         return components.contains(parent);
     }
 
