@@ -4,6 +4,7 @@ import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.api.annotation.ComponentConfiguration;
 import com.terbah.sketch.api.annotation.MethodInjectable;
 import com.terbah.sketch.api.exception.SketchComponentExecuteException;
+import com.terbah.sketch.api.ui.SketchConfigurationPopup;
 import com.terbah.sketch.natif.type.NumberList;
 
 /**
@@ -60,5 +61,10 @@ public class SketchSequenceComponent implements SketchComponent<NumberList> {
         component.end = this.end;
         component.step = this.step;
         return component;
+    }
+
+    @Override
+    public SketchConfigurationPopup openConfigurationPopup() {
+        return null;
     }
 }

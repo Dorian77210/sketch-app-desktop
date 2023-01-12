@@ -1,6 +1,7 @@
 package com.terbah.sketch.app.ui.controller;
 
 import com.terbah.sketch.api.SketchComponent;
+import com.terbah.sketch.api.ui.SketchConfigurationPopup;
 import com.terbah.sketch.app.core.board.SketchBoardManager;
 import com.terbah.sketch.app.core.logger.SketchLoggerManager;
 import com.terbah.sketch.app.core.workflow.SketchComponentWorkflow;
@@ -70,6 +71,11 @@ public class SketchBoardControllerMediator {
     private final SketchArrowController arrowController;
 
     /**
+     * Mouse controller for the components
+     */
+    private final SketchComponentMouseController mouseController;
+
+    /**
      * Logger.
      */
     private Logger logger;
@@ -95,6 +101,7 @@ public class SketchBoardControllerMediator {
         this.dragController = new SketchComponentDragController(this);
         this.logger = SketchLoggerManager.getLogger(this.getClass());
         this.arrowController = new SketchArrowController(this);
+        this.mouseController = new SketchComponentMouseController(this);
 
         // set the listeners
         this.board.setOnMouseClicked(this::receiveClickEvent);
@@ -137,6 +144,7 @@ public class SketchBoardControllerMediator {
         ui.setOnMouseReleased(this.dragController);
         ui.setOnMouseDragged(this.dragController);
         ui.setOnMouseEntered(this.dragController);
+        ui.setOnMouseClicked(this.mouseController);
 
         this.board.getChildren().add(ui);
         this.uiToComponent.put(ui, component);
@@ -301,5 +309,15 @@ public class SketchBoardControllerMediator {
      */
     public void executeComponent(final SketchComponent<?> component) {
         this.workflow.execute(component);
+    }
+
+    /**
+     * Open the configuration popup for a component.
+     * @param ui The ui corresponding to the component.
+     */
+    public void openConfigurationPopup(final SketchComponentUI ui) {
+        SketchComponent<?> component = this.uiToComponent.get(ui);
+        SketchConfigurationPopup popup = component.openConfigurationPopup();
+        popup.show();
     }
 }

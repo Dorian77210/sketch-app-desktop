@@ -3,6 +3,11 @@ package com.terbah.sketch.natif.component.common;
 
 import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.api.annotation.ComponentConfiguration;
+import com.terbah.sketch.api.data.util.SketchDataWrapper;
+import com.terbah.sketch.api.data.util.SketchDataWrapperFactory;
+import com.terbah.sketch.api.exception.SketchComponentExecuteException;
+import com.terbah.sketch.api.ui.SketchConfigurationPopup;
+import com.terbah.sketch.natif.ui.common.SketchNumberComponentPopup;
 
 
 @ComponentConfiguration(
@@ -11,21 +16,26 @@ import com.terbah.sketch.api.annotation.ComponentConfiguration;
 )
 public class SketchNumberComponent implements SketchComponent<Number> {
 
-    private Number value;
+    private SketchDataWrapper<Number> value;
 
     public SketchNumberComponent() {
-        this.value = 0;
+        this.value = SketchDataWrapperFactory.getWrapper(0.0);
     }
 
     @Override
-    public Number execute() {
-        return this.value;
+    public Number execute() throws SketchComponentExecuteException {
+        return this.value.isDataAvailable() ? this.value.getData() : 0.0;
     }
 
     @Override
     public SketchComponent<Number> copy() {
         SketchNumberComponent component = new SketchNumberComponent();
-        component.value = this.value;
+        component.value.setData(this.value.getData());
         return component;
+    }
+
+    @Override
+    public SketchConfigurationPopup openConfigurationPopup() {
+        return new SketchNumberComponentPopup(this.value);
     }
 }

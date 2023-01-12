@@ -1,6 +1,7 @@
 package com.terbah.sketch.api;
 
 import com.terbah.sketch.api.exception.SketchComponentExecuteException;
+import com.terbah.sketch.api.ui.SketchConfigurationPopup;
 
 /**
  * @param <T> The type for the execute method. For example,
@@ -22,4 +23,9 @@ public interface SketchComponent<T> {
      * @return A copy of the component.
      */
     SketchComponent<T> copy();
+
+    /**
+     * @return A pop up to configure the corresponding component
+     */
+    SketchConfigurationPopup openConfigurationPopup();
 }
