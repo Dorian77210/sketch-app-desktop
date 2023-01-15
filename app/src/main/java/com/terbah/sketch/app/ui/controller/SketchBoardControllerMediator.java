@@ -81,6 +81,11 @@ public class SketchBoardControllerMediator {
     private Logger logger;
 
     /**
+     * List of all the associations
+     */
+    private List<SketchArrow> arrows;
+
+    /**
      * Current selected arrow;
      */
     private SketchArrow currentSelectedArrow;
@@ -97,6 +102,7 @@ public class SketchBoardControllerMediator {
         this.selectedSlots = new ArrayDeque<>();
         this.uiToComponent = new HashMap<>();
         this.selectedComponents = new ArrayList<>();
+        this.arrows = new LinkedList<>();
         this.selectedUIs = new ArrayList<>();
         this.dragController = new SketchComponentDragController(this);
         this.logger = SketchLoggerManager.getLogger(this.getClass());
@@ -252,6 +258,7 @@ public class SketchBoardControllerMediator {
         this.board.getChildren().add(arrow);
         arrow.setOnMouseClicked(this.arrowController);
         arrow.setOnMouseEntered(this.arrowController);
+        this.arrows.add(arrow);
     }
 
     public List<SketchComponent<?>> getSelectedComponents() {
@@ -277,6 +284,14 @@ public class SketchBoardControllerMediator {
             SketchComponent<?> component = this.uiToComponent.get(currentUI);
             this.workflow.deleteComponent(component);
             this.board.getChildren().remove(currentUI);
+
+            // remove links
+            List<SketchArrow> componentsLinks = this.arrows.stream().filter(arrow -> {
+                return arrow.getDestinationComponent().equals(component) ||
+                        arrow.getSourceComponent().equals(component);
+            }).toList();
+            this.arrows.removeAll(componentsLinks);
+            this.board.getChildren().removeAll(componentsLinks);
         }
     }
 
