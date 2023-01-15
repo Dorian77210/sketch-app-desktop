@@ -51,7 +51,11 @@ public class SketchOperationComponent implements SketchComponent<Number> {
             throw new SketchComponentExecuteException("Invalid second operand");
         }
 
-        return this.operation.apply(this.firstOperand.getData(), this.secondOperand.getData());
+        try {
+            return this.operation.apply(this.firstOperand.getData(), this.secondOperand.getData());
+        } catch (Exception exception) {
+            throw new SketchComponentExecuteException(exception.getMessage());
+        }
     }
 
     /**

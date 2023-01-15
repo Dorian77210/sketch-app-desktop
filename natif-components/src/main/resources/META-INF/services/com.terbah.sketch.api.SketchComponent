@@ -4,3 +4,6 @@ com.terbah.sketch.natif.component.math.SketchSequenceComponent
 
 
 com.terbah.sketch.natif.component.math.operation.SketchMulComponent
+com.terbah.sketch.natif.component.math.operation.SketchAddComponent
+com.terbah.sketch.natif.component.math.operation.SketchSubComponent
+com.terbah.sketch.natif.component.math.operation.SketchDivideComponent
