@@ -59,7 +59,7 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
             this.logger.log(Level.SEVERE, "Exception thrown", e);
         }
 
-        Method[] methods = componentClass.getDeclaredMethods();
+        Method[] methods = componentClass.getMethods();
 
         for (Method method : methods) {
             if (this.isInjectableMethod(method)) {

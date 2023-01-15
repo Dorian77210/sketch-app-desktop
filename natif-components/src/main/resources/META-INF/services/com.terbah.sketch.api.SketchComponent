@@ -1,2 +1,6 @@
 com.terbah.sketch.natif.component.SketchNumberComponent
 com.terbah.sketch.natif.component.math.SketchSequenceComponent
+
+
+
+com.terbah.sketch.natif.component.math.operation.SketchMulComponent

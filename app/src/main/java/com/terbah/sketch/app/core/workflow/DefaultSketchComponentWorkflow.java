@@ -175,8 +175,8 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
     public void deleteComponent(SketchComponent<?> component) {
         this.orphanComponents.remove(component);
         this.edges.remove(component);
-
         // remove in the children ?
+        this.children.remove(component);
 
         // remove links where the component is a parent
 
