@@ -125,9 +125,11 @@ class DefaultSketchComponentWorkflow implements SketchComponentWorkflow {
             }
         }
 
-        // inject the result of the source component in his children
-        for (var entry : this.children.get(currentComponent).entrySet()) {
-            this.dataInjector.injectData(entry.getValue(), entry.getKey(), result);
+        if (this.children.containsKey(currentComponent)) {
+            // inject the result of the source component in his children
+            for (var entry : this.children.get(currentComponent).entrySet()) {
+                this.dataInjector.injectData(entry.getValue(), entry.getKey(), result);
+            }
         }
 
         return true;

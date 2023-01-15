@@ -18,15 +18,21 @@ import java.util.function.BiFunction;
  *
  * @version 1.0
  */
-public class SketchOperationComponent implements SketchComponent<Number> {
+public abstract class SketchOperationComponent implements SketchComponent<Number> {
 
     /**
      * Function used for computing a result
      */
     private BiFunction<Number, Number, Number> operation;
 
+    /**
+     * First operand
+     */
     protected SketchDataWrapper<Number> firstOperand;
 
+    /**
+     * Second operand
+     */
     protected SketchDataWrapper<Number> secondOperand;
 
     /**
@@ -74,14 +80,6 @@ public class SketchOperationComponent implements SketchComponent<Number> {
     @MethodInjectable(value = "second operand", order = 1)
     public void setSecondOperand(Number operand) {
         this.secondOperand.setData(operand);
-    }
-
-    @Override
-    public SketchComponent<Number> copy() {
-        SketchOperationComponent component = new SketchOperationComponent(this.operation);
-        component.firstOperand.setData(this.firstOperand.getData());
-        component.secondOperand.setData(this.secondOperand.getData());
-        return component;
     }
 
     @Override

@@ -55,6 +55,7 @@ public class DefaultSketchComponentConfigurationManager implements SketchCompone
 
         try {
             configuration.setReturnType(componentClass.getMethod("execute").getReturnType());
+            this.logger.log(Level.FINE, "Method execute found {0}", configuration.getReturnType());
         } catch (NoSuchMethodException e) {
             this.logger.log(Level.SEVERE, "Exception thrown", e);
         }

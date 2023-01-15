@@ -1,6 +1,7 @@
 package com.terbah.sketch.natif.component.math.operation;
 
 import com.terbah.sketch.api.annotation.ComponentConfiguration;
+import com.terbah.sketch.api.data.util.SketchDataWrapperFactory;
 
 /**
  * @author Dorian TERBAH
@@ -20,5 +21,13 @@ public class SketchSubComponent extends SketchOperationComponent {
      */
     public SketchSubComponent() {
         super((a, b) -> a.doubleValue() - b.doubleValue());
+    }
+
+    @Override
+    public SketchSubComponent copy() {
+        SketchSubComponent component = new SketchSubComponent();
+        component.firstOperand = SketchDataWrapperFactory.getWrapper(this.firstOperand.getData());
+        component.secondOperand = SketchDataWrapperFactory.getWrapper(this.secondOperand.getData());
+        return component;
     }
 }
