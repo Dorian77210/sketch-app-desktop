@@ -6,19 +6,19 @@ import com.terbah.sketch.api.annotation.ComponentConfiguration;
 /**
  * @author Dorian TERBAH
  *
- * Component that compute a cosinus on a single input.
+ * Component that compute an absolute on a single input.
  *
  * @version 1.0
  */
 
 @ComponentConfiguration(
-        name = "Cosinus on single input",
+        name = "Abs on single input",
         namespace = "Math/Function"
 )
-public class SketchCosComponent extends SketchInputFunctionComponent {
+public class SketchAbsComponent extends SketchInputFunctionComponent {
 
-    public SketchCosComponent() {
-        super(a -> Math.cos(a.doubleValue()));
+    public SketchAbsComponent() {
+        super(a -> Math.abs(a.doubleValue()));
     }
 
     @Override

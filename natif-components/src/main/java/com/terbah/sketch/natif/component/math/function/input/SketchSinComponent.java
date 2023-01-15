@@ -6,19 +6,19 @@ import com.terbah.sketch.api.annotation.ComponentConfiguration;
 /**
  * @author Dorian TERBAH
  *
- * Component that compute a cosinus on a single input.
+ * Component that compute a sinus on a single input.
  *
  * @version 1.0
  */
 
 @ComponentConfiguration(
-        name = "Cosinus on single input",
+        name = "Sinus on single input",
         namespace = "Math/Function"
 )
-public class SketchCosComponent extends SketchInputFunctionComponent {
+public class SketchSinComponent extends SketchInputFunctionComponent {
 
-    public SketchCosComponent() {
-        super(a -> Math.cos(a.doubleValue()));
+    public SketchSinComponent() {
+        super(a -> Math.sin(a.doubleValue()));
     }
 
     @Override

@@ -9,3 +9,7 @@ com.terbah.sketch.natif.component.math.operation.SketchSubComponent
 com.terbah.sketch.natif.component.math.operation.SketchDivideComponent
 
 com.terbah.sketch.natif.component.math.function.input.SketchCosComponent
+com.terbah.sketch.natif.component.math.function.input.SketchSinComponent
+com.terbah.sketch.natif.component.math.function.input.SketchTanComponent
+com.terbah.sketch.natif.component.math.function.input.SketchAbsComponent
+com.terbah.sketch.natif.component.math.function.input.SketchExpComponent

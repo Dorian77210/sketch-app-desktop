@@ -6,19 +6,19 @@ import com.terbah.sketch.api.annotation.ComponentConfiguration;
 /**
  * @author Dorian TERBAH
  *
- * Component that compute a cosinus on a single input.
+ * Component that compute a exp on a single input.
  *
  * @version 1.0
  */
 
 @ComponentConfiguration(
-        name = "Cosinus on single input",
+        name = "Exponential on single input",
         namespace = "Math/Function"
 )
-public class SketchCosComponent extends SketchInputFunctionComponent {
+public class SketchExpComponent extends SketchInputFunctionComponent {
 
-    public SketchCosComponent() {
-        super(a -> Math.cos(a.doubleValue()));
+    public SketchExpComponent() {
+        super(a -> Math.exp(a.doubleValue()));
     }
 
     @Override

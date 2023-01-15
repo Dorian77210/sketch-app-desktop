@@ -93,7 +93,7 @@ public class SketchComponentTreeView extends BorderPane {
             SketchComponentConfiguration configuration = entry.getValue();
             String namespace = String.format("%s/%s", configuration.getNamespace().toLowerCase(), configuration.getComponentName());
 
-            if (namespace.contains(filter.toLowerCase()))
+            if (namespace.toLowerCase().contains(filter.toLowerCase()))
             {
                 this.treeModel.insertComponent(entry.getKey());
             }

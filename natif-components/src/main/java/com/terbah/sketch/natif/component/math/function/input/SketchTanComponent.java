@@ -6,19 +6,19 @@ import com.terbah.sketch.api.annotation.ComponentConfiguration;
 /**
  * @author Dorian TERBAH
  *
- * Component that compute a cosinus on a single input.
+ * Component that compute a cosinus of a single input.
  *
  * @version 1.0
  */
 
 @ComponentConfiguration(
-        name = "Cosinus on single input",
+        name = "Tangent on single input",
         namespace = "Math/Function"
 )
-public class SketchCosComponent extends SketchInputFunctionComponent {
+public class SketchTanComponent extends SketchInputFunctionComponent {
 
-    public SketchCosComponent() {
-        super(a -> Math.cos(a.doubleValue()));
+    public SketchTanComponent() {
+        super(a -> Math.tan(a.doubleValue()));
     }
 
     @Override
