@@ -1,4 +1,4 @@
-package com.terbah.sketch.natif.component.data.math;
+package com.terbah.sketch.natif.component.math;
 
 import com.terbah.sketch.natif.component.math.SketchSequenceComponent;
 

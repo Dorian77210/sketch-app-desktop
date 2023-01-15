@@ -2,7 +2,7 @@ package com.terbah.sketch.natif.component.ui.math;
 
 import com.terbah.sketch.api.ui.SketchConfigurationPopup;
 import com.terbah.sketch.api.ui.SketchAlertBuilder;
-import com.terbah.sketch.natif.component.data.math.SketchSequenceData;
+import com.terbah.sketch.natif.component.math.SketchSequenceData;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;

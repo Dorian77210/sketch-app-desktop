@@ -5,7 +5,6 @@ import com.terbah.sketch.api.annotation.ComponentConfiguration;
 import com.terbah.sketch.api.annotation.MethodInjectable;
 import com.terbah.sketch.api.exception.SketchComponentExecuteException;
 import com.terbah.sketch.api.ui.SketchConfigurationPopup;
-import com.terbah.sketch.natif.component.data.math.SketchSequenceData;
 import com.terbah.sketch.natif.component.ui.math.SketchSequenceComponentPopup;
 import com.terbah.sketch.natif.type.NumberList;
 
