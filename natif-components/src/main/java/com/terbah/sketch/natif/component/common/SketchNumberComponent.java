@@ -1,4 +1,4 @@
-package com.terbah.sketch.natif.component;
+package com.terbah.sketch.natif.component.common;
 
 
 import com.terbah.sketch.api.SketchComponent;

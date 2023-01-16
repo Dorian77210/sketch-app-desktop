@@ -1,7 +1,5 @@
-com.terbah.sketch.natif.component.SketchNumberComponent
+com.terbah.sketch.natif.component.common.SketchNumberComponent
 com.terbah.sketch.natif.component.math.SketchSequenceComponent
-
-
 
 com.terbah.sketch.natif.component.math.operation.SketchMulComponent
 com.terbah.sketch.natif.component.math.operation.SketchAddComponent
@@ -15,3 +13,5 @@ com.terbah.sketch.natif.component.math.function.input.SketchAbsComponent
 com.terbah.sketch.natif.component.math.function.input.SketchExpComponent
 
 com.terbah.sketch.natif.component.math.function.list.SketchCosComponent
+
+com.terbah.sketch.natif.component.common.chart.SketchXYLineChartComponent
