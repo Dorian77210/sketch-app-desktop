@@ -3,6 +3,7 @@ package com.terbah.sketch.natif.component.math.function.list;
 import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.api.annotation.MethodInjectable;
 import com.terbah.sketch.api.data.dataframe.DataFrame;
+import com.terbah.sketch.api.data.dataframe.DataFrameFactory;
 import com.terbah.sketch.api.data.util.SketchDataWrapper;
 import com.terbah.sketch.api.data.util.SketchDataWrapperFactory;
 import com.terbah.sketch.api.exception.SketchComponentExecuteException;
@@ -23,7 +24,7 @@ public abstract class SketchListFunctionComponent implements SketchComponent<Dat
     /**
      * Function used to compute the final result.
      */
-    private Function<NumberList, DataFrame> function;
+    private Function<Number, Number> function;
 
     /**
      * Data wrapper of the input values.
@@ -34,7 +35,7 @@ public abstract class SketchListFunctionComponent implements SketchComponent<Dat
      * Constructor of the class SketchListFunctionComponent
      * @param function The function used to compute the final result
      */
-    public SketchListFunctionComponent(Function<NumberList, DataFrame> function) {
+    public SketchListFunctionComponent(Function<Number, Number> function) {
         this.function = function;
         this.dataWrapper = SketchDataWrapperFactory.getWrapper(NumberList.class);
     }
@@ -45,7 +46,17 @@ public abstract class SketchListFunctionComponent implements SketchComponent<Dat
             throw new SketchComponentExecuteException("No data available for computing mathematical function");
         }
 
-        return this.function.apply(this.dataWrapper.getData());
+        NumberList x = this.dataWrapper.getData();
+        DataFrame dataframe = DataFrameFactory.emptyDataframe();
+        NumberList y = new NumberList();
+
+        x.forEach(nbr -> {
+            y.add(this.function.apply(nbr));
+        });
+
+        // fill the dataframe
+
+        return dataframe.addNumericColumn("x", x).addNumericColumn("y", y);
     }
 
     @MethodInjectable(value = "inputs")

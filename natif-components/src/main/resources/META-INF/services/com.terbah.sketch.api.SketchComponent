@@ -13,3 +13,5 @@ com.terbah.sketch.natif.component.math.function.input.SketchSinComponent
 com.terbah.sketch.natif.component.math.function.input.SketchTanComponent
 com.terbah.sketch.natif.component.math.function.input.SketchAbsComponent
 com.terbah.sketch.natif.component.math.function.input.SketchExpComponent
+
+com.terbah.sketch.natif.component.math.function.list.SketchCosComponent
