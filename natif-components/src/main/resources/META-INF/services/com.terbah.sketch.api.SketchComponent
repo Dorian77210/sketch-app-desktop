@@ -21,3 +21,5 @@ com.terbah.sketch.natif.component.math.function.list.SketchAbsComponent
 com.terbah.sketch.natif.component.math.function.list.SketchLogComponent
 
 com.terbah.sketch.natif.component.common.chart.SketchXYLineChartComponent
+
+com.terbah.sketch.natif.component.common.dataframe.SketchDataFrameCSVLoaderComponent
