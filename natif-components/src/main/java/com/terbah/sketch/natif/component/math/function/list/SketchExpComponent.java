@@ -30,13 +30,13 @@ public class SketchExpComponent extends SketchListFunctionComponent {
 
     @Override
     public SketchComponent<DataFrame> copy() {
-        SketchCosComponent component = new SketchCosComponent();
+        SketchExpComponent component = new SketchExpComponent();
         component.dataWrapper.setData(this.dataWrapper.getData().copy());
         return component;
     }
 
     @Override
     public SketchConfigurationPopup openConfigurationPopup() {
-        return new SketchDisplayListPopup("Numbers computed with cosinus function", this.dataWrapper.getData());
+        return new SketchDisplayListPopup(this.dataWrapper.getData());
     }
 }

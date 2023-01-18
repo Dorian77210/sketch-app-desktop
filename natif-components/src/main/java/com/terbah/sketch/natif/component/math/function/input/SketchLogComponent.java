@@ -2,7 +2,6 @@ package com.terbah.sketch.natif.component.math.function.input;
 
 import com.terbah.sketch.api.SketchComponent;
 import com.terbah.sketch.api.annotation.ComponentConfiguration;
-import com.terbah.sketch.api.data.dataframe.DataFrame;
 import com.terbah.sketch.api.ui.SketchConfigurationPopup;
 import com.terbah.sketch.natif.component.ui.common.SketchDisplayListPopup;
 
@@ -18,10 +17,10 @@ import com.terbah.sketch.natif.component.ui.common.SketchDisplayListPopup;
         name = "Log on list input",
         namespace = "Math/List/Function"
 )
-public class SketchLogComponent extends SketchListFunctionComponent {
+public class SketchLogComponent extends SketchInputFunctionComponent {
 
     /**
-     * Constructor of the class SketchListFunctionComponent
+     * Constructor of the class SketchLogFunctionComponent
      */
     public SketchLogComponent() {
         super(a -> Math.log(a.doubleValue()));
@@ -29,14 +28,9 @@ public class SketchLogComponent extends SketchListFunctionComponent {
 
 
     @Override
-    public SketchComponent<DataFrame> copy() {
-        SketchCosComponent component = new SketchCosComponent();
-        component.dataWrapper.setData(this.dataWrapper.getData().copy());
+    public SketchComponent<Number> copy() {
+        SketchLogComponent component = new SketchLogComponent();
+        component.dataWrapper.setData(this.dataWrapper.getData());
         return component;
-    }
-
-    @Override
-    public SketchConfigurationPopup openConfigurationPopup() {
-        return new SketchDisplayListPopup("Numbers computed with cosinus function", this.dataWrapper.getData());
     }
 }

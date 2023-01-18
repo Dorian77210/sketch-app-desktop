@@ -23,7 +23,7 @@ public class SketchAbsComponent extends SketchInputFunctionComponent {
 
     @Override
     public SketchComponent<Number> copy() {
-        SketchCosComponent component = new SketchCosComponent();
+        SketchAbsComponent component = new SketchAbsComponent();
         component.dataWrapper.setData(this.dataWrapper.getData());
         return component;
     }

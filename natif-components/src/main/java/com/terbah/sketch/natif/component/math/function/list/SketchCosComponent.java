@@ -37,6 +37,6 @@ public class SketchCosComponent extends SketchListFunctionComponent {
 
     @Override
     public SketchConfigurationPopup openConfigurationPopup() {
-        return new SketchDisplayListPopup("Numbers computed with cosinus function", this.dataWrapper.getData());
+        return new SketchDisplayListPopup(this.dataWrapper.getData());
     }
 }

@@ -26,8 +26,8 @@ public class SketchDisplayListPopup extends SketchConfigurationPopup {
      *
      * @param title
      */
-    public SketchDisplayListPopup(String title, List<?> data) {
-        super(title);
+    public SketchDisplayListPopup(List<?> data) {
+        super("Data that will be computed");
         BorderPane pane = new BorderPane();
         VBox box = new VBox();
         box.getChildren().add(new Label("Data proceeded"));

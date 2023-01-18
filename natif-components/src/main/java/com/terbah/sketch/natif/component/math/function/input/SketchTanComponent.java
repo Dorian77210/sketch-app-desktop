@@ -23,7 +23,7 @@ public class SketchTanComponent extends SketchInputFunctionComponent {
 
     @Override
     public SketchComponent<Number> copy() {
-        SketchCosComponent component = new SketchCosComponent();
+        SketchTanComponent component = new SketchTanComponent();
         component.dataWrapper.setData(this.dataWrapper.getData());
         return component;
     }

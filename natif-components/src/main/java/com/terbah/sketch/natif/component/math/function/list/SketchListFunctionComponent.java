@@ -8,6 +8,7 @@ import com.terbah.sketch.api.data.util.SketchDataWrapper;
 import com.terbah.sketch.api.data.util.SketchDataWrapperFactory;
 import com.terbah.sketch.api.exception.SketchComponentExecuteException;
 import com.terbah.sketch.api.ui.SketchConfigurationPopup;
+import com.terbah.sketch.natif.component.ui.common.SketchDisplayListPopup;
 import com.terbah.sketch.natif.type.NumberList;
 
 import java.util.function.Function;
@@ -55,8 +56,12 @@ public abstract class SketchListFunctionComponent implements SketchComponent<Dat
         });
 
         // fill the dataframe
-
         return dataframe.addNumericColumn("x", x).addNumericColumn("y", y);
+    }
+
+    @Override
+    public SketchConfigurationPopup openConfigurationPopup() {
+        return new SketchDisplayListPopup(this.dataWrapper.getData());
     }
 
     @MethodInjectable(value = "inputs")
