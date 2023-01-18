@@ -8,7 +8,7 @@ import com.terbah.sketch.api.exception.SketchComponentExecuteException;
 import com.terbah.sketch.api.ui.SketchConfigurationPopup;
 import com.terbah.sketch.natif.component.data.common.dataframe.SketchCSVDataFrameConfiguration;
 import com.terbah.sketch.natif.component.ui.common.dataframe.SketchDataFrameCSVLoaderPopup;
-import javafx.stage.Window;
+
 import java.io.File;
 
 /**
