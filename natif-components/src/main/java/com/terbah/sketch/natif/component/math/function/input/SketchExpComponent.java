@@ -13,7 +13,7 @@ import com.terbah.sketch.api.annotation.ComponentConfiguration;
 
 @ComponentConfiguration(
         name = "Exponential on single input",
-        namespace = "Math/Function"
+        namespace = "Math/Input/Function"
 )
 public class SketchExpComponent extends SketchInputFunctionComponent {
 

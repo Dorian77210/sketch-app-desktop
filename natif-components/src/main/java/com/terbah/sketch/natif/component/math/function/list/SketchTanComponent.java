@@ -9,22 +9,22 @@ import com.terbah.sketch.natif.component.ui.common.SketchDisplayListPopup;
 /**
  * @author Dorian TERBAH
  *
- * Component that will compute the cosinus function on a list of numbers.
+ * Component that will compute the tangent function on a list of numbers.
  *
  * @version 1.0
  */
 
 @ComponentConfiguration(
-        name = "Cosinus on list input",
+        name = "Tangent on list input",
         namespace = "Math/List/Function"
 )
-public class SketchCosComponent extends SketchListFunctionComponent {
+public class SketchTanComponent extends SketchListFunctionComponent {
 
     /**
      * Constructor of the class SketchListFunctionComponent
      */
-    public SketchCosComponent() {
-        super(a -> Math.cos(a.doubleValue()));
+    public SketchTanComponent() {
+        super(a -> Math.tan(a.doubleValue()));
     }
 
 

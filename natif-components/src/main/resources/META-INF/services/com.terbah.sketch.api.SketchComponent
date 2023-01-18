@@ -11,7 +11,13 @@ com.terbah.sketch.natif.component.math.function.input.SketchSinComponent
 com.terbah.sketch.natif.component.math.function.input.SketchTanComponent
 com.terbah.sketch.natif.component.math.function.input.SketchAbsComponent
 com.terbah.sketch.natif.component.math.function.input.SketchExpComponent
+com.terbah.sketch.natif.component.math.function.list.SketchLogComponent
 
 com.terbah.sketch.natif.component.math.function.list.SketchCosComponent
+com.terbah.sketch.natif.component.math.function.list.SketchTanComponent
+com.terbah.sketch.natif.component.math.function.list.SketchSinComponent
+com.terbah.sketch.natif.component.math.function.list.SketchExpComponent
+com.terbah.sketch.natif.component.math.function.list.SketchAbsComponent
+com.terbah.sketch.natif.component.math.function.list.SketchLogComponent
 
 com.terbah.sketch.natif.component.common.chart.SketchXYLineChartComponent

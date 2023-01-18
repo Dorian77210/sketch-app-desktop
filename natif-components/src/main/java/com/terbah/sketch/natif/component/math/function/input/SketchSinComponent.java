@@ -13,7 +13,7 @@ import com.terbah.sketch.api.annotation.ComponentConfiguration;
 
 @ComponentConfiguration(
         name = "Sinus on single input",
-        namespace = "Math/Function"
+        namespace = "Math/Input/Function"
 )
 public class SketchSinComponent extends SketchInputFunctionComponent {
 
