@@ -27,3 +27,4 @@ com.terbah.sketch.natif.component.common.dataframe.SketchDataFrameViewerComponen
 com.terbah.sketch.natif.component.common.dataframe.SketchDataFrameNormalizerComponent
 com.terbah.sketch.natif.component.common.dataframe.SketchDataFrameShuffleComponent
 com.terbah.sketch.natif.component.common.dataframe.SketchDataFrameNumberFilterComponent
+com.terbah.sketch.natif.component.common.dataframe.SketchDataFrameSelectColumnComponent
