@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Main-Class: 
+Class-Path: javafx-base-18-ea+6-mac.jar javafx-controls-18-ea+6-mac.jar 
+ javafx-controls-18-ea+6.jar javafx-fxml-18-ea+6.jar controlsfx-11.1.2.j
+ ar javafx-base-18-ea+6.jar javafx-graphics-18-ea+6.jar javafx-fxml-18-e
+ a+6-mac.jar javafx-graphics-18-ea+6-mac.jar jfoenix-9.0.1.jar
+
