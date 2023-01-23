@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.TextAlignment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,7 @@ public class SketchDataFrameView extends GridPane
                 String header = headers.get(headerIndex);
                 Label headerLabel = new Label(header);
                 this.add(headerLabel, headerIndex, 1);
+                headerLabel.setTextAlignment(TextAlignment.CENTER);
             }
 
             for (int headerIndex = 0; headerIndex < headers.size(); ++headerIndex)
